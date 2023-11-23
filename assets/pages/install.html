@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Install NostNet Web Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #201f1f;
+        }
+
+        .modal {
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #c8c3c3;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+        }
+
+        .installButton {
+            padding: 10px 20px;
+            background-color: #889489;
+            color: rgb(20, 20, 20);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .instructions {
+            margin-top: 10px;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="installDialog" class="modal">
+        <div class="modal-content">
+            <p>Install NostNet Web Portal on your device:</p>
+            <button id="installButton" class="installButton">Install App</button>
+            <p class="instructions">For iOS users, tap the share icon and select "Add to Home Screen."</p>
+        </div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/assets/js/sw.js');
+        }
+    </script>
+
+    <script>
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    // Prevent the mini-infobar from appearing on mobile
+    event.preventDefault();
+
+    // Stash the event so it can be triggered later.
+    deferredPrompt = event;
+
+    // Update UI to notify the user they can add to home screen
+    document.getElementById('installButton').style.display = 'block';
+  });
+
+  // Handle the install button click event
+  document.getElementById('installButton').addEventListener('click', () => {
+    // Show the install prompt
+    deferredPrompt.prompt();
+
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      } else {
+        console.log('User dismissed the install prompt');
+      }
+
+      // Reset the deferred prompt variable
+      deferredPrompt = null;
+
+      // Hide the install button
+      document.getElementById('installButton').style.display = 'none';
+    });
+  });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Center the content vertically */
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+.container {
+    position: absolute;
+    top: 0%;
+    width: 95%;
+    max-width: 800px;
+    /* Center the container horizontally */
+}
+
+#linksContainer {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+    padding: 20px;
+    padding-top: 30px;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    /* Set a maximum width for the container */
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    /* Center the container horizontally */
+}
+
+.button-container{
+    display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+        
+        
+        justify-content: center;
+        align-items: center;
+        display: flex;
+
+}
+#addLinkButton {
+background-color: #2b282c;
+    color: #d6d5d5;
+    padding: 6px 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+}
+
+#addLinkButton:hover {
+    background-color: #333;
+}
+
+button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #201e21;
+    color: #d6d5d5;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+}
+
+
+
+
+.delete {
+    background-color: #2b282c;
+    color: #d6d5d5;
+    padding: 6px 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+}
+
+#homeButton {
+    background-color: #2b282c;
+        color: #d6d5d5;
+        padding: 6px 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 15px;
+        border-radius: 9999px;
+        font-weight: 600;
+        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+}
+
+#backButton:hover {
+    background-color: #333;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+dialog {
+    background-color: #444;
+    color: #ffffff;
+    padding: 10px;
+    border: 2px solid #666;
+    border-radius: 5px;
+    width: 70%;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 90%;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #666;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+input[type="text"]:focus {
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+input::placeholder {
+    color: #999;
+    /* Placeholder text color */
+    font-style: italic;
+    font-weight: 600;
+    font-size: large;
+    /* Optional: Italicize the placeholder text */
+}
+
+/* Add focus styles for better visibility */
+input:focus::placeholder {
+    color: #666;
+    /* Adjust color on focus */
+}
+
+.link-container {
+    position: relative;
+    display: inline-block;
+}
+
+.delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #201e21;
+    color: white;
+    border: none;
+    padding: 0px 3px;
+    cursor: pointer;
+    display: none;
+    font-size: large;
+    
+}
+
+.hidden-button {
+    display: block;
+}

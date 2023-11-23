@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NostrNet Web</title>
+    <link rel="stylesheet" href="lists.css" />
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <section id="linksContainer">
+        <!-- Links will be dynamically added here -->
+    </section>
+
+    <div>
+
+    <div class="button-container">
+        <button id="addLinkButton" onclick="openLinkAddingDialog()">Add</button>
+        <button class="delete" id="toggleDeleteButton">Edit</button>
+        <button id="homeButton" onclick="goHome()">Back</button>
+    </div>
+
+    <dialog id="linkAddingDialog">
+        <div>
+            <label for="newLinkTitle"></label>
+            <input type="text" id="newLinkTitle" placeholder="Enter link title" />
+        </div>
+        <div>
+            <label for="newLinkURL"></label>
+            <input type="text" id="newLinkURL" placeholder="Enter link URL" />
+        </div>
+        <button onclick="addLink()">Add Link</button>
+        <button onclick="closeLinkAddingDialog()">Cancel</button>
+       
+    </dialog>
+    </div>
+
+    <script src="/lists.js">
+        
+    </script>
+</body>
+
+</html>
