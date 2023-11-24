@@ -13,19 +13,24 @@
 
 <body>
     <div class="container">
-    <section id="linksContainer">
-        <!-- Links will be dynamically added here -->
-    </section>
+   
 
     <div>
 
     <div class="button-container">
         <button id="addLinkButton" onclick="openLinkAddingDialog()">Add</button>
+        <button id="backupRestoreButton" class="BackupRestore" onclick="openBackupRestoreDialog()">Backup</button>
         <button class="delete" id="toggleDeleteButton">Edit</button>
-        <button id="homeButton" onclick="goHome()">Back</button>
-    </div>
+        <button id="homeButton" onclick="goHome()">Home</button>
+        <!-- Add this button in the button container -->
+        
 
-    <dialog id="linkAddingDialog">
+    </div>
+    <section id="linksContainer">
+        <!-- Links will be dynamically added here -->
+    </section>
+
+    <dialog id="linkAddingDialog" class="linkAddingDialog">
         <div>
             <label for="newLinkTitle"></label>
             <input type="text" id="newLinkTitle" placeholder="Enter link title" />
@@ -35,8 +40,14 @@
             <input type="text" id="newLinkURL" placeholder="Enter link URL" />
         </div>
         <button onclick="addLink()">Add Link</button>
-        <button onclick="closeLinkAddingDialog()">Cancel</button>
+        <button onclick="closeLinkAddingDialog()" >Cancel</button>
        
+    </dialog>
+
+    <dialog id="backupRestoreDialog">
+        <button id="downloadDataButton">Backup</button>
+        <button id="restoreDataButton">Restore</button><br>
+        <button id="Cancel" style="margin-top: 10px;" onclick="closeBackupRestoreDialog()">Cancel</button>
     </dialog>
     </div>
 

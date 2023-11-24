@@ -53,17 +53,20 @@ function createLinkContainer(link) {
   deleteButton.textContent = "X";
   deleteButton.className = "delete-button"; // Initially hidden
 
-  const links = JSON.parse(localStorage.getItem("links")) || [];
-
+  // Event listener for link button
   linkButton.addEventListener("click", () => {
     window.location.href = link.url;
   });
 
+  // Event listener for delete button
   deleteButton.addEventListener("click", () => {
+    const links = JSON.parse(localStorage.getItem("links")) || [];
     const updatedLinks = links.filter(
       (l) => !(l.title === link.title && l.url === link.url)
     );
     localStorage.setItem("links", JSON.stringify(updatedLinks));
+
+    // Remove the link container immediately
     linkDiv.remove();
   });
 
@@ -72,6 +75,7 @@ function createLinkContainer(link) {
 
   return linkDiv;
 }
+
 
 function loadLinks() {
   const linkContainer = document.getElementById("linksContainer");
@@ -97,3 +101,67 @@ function goHome() {
   const homeLink = "/index.html";
   window.location.href = homeLink;
 }
+
+
+
+function openBackupRestoreDialog() {
+  document.getElementById("backupRestoreDialog").showModal();
+}
+
+function closeBackupRestoreDialog() {
+  document.getElementById("backupRestoreDialog").close();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // ... (existing code)
+
+  // Attach event listener for backup/restore button
+  document
+    .getElementById("backupRestoreButton")
+    .addEventListener("click", openBackupRestoreDialog);
+
+  // Attach event listener for download and restore buttons in the dialog
+  document
+    .getElementById("downloadDataButton")
+    .addEventListener("click", downloadData);
+
+  document
+    .getElementById("restoreDataButton")
+    .addEventListener("click", restoreData);
+});
+
+// Add these functions at the end of your JavaScript code
+
+function downloadData() {
+    const links = localStorage.getItem("links");
+    const blob = new Blob([links], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "links_backup.json";
+    link.click();
+}
+
+function restoreData() {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+
+    input.onchange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = e.target.result;
+                localStorage.setItem("links", data);
+                // Reload links on the page
+                loadLinks();
+                // Close the dialog
+                closeBackupRestoreDialog();
+            };
+            reader.readAsText(file);
+        }
+    };
+
+    input.click();
+}
+
