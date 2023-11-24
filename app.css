@@ -211,7 +211,7 @@ body {
 #googleSearch {
   padding: 5px 8px;
   width: 95%;
-  font-size: larger;
+  font-size: medium;
   background-color: var(--cards);
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
   border: none;
