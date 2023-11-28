@@ -8,3 +8,9 @@
    window.location.href =
      "https://www.google.com/search?q=" + encodeURIComponent(searchTerm);
  }
+
+document.getElementById("googleSearch").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        performGoogleSearch();
+    }
+});
