@@ -44,24 +44,14 @@ const CONFIG = {
   // └─┘└─┘ ┴  ┴ └─┘┘└┘└─┘
 
   firstButtonsContainer: [
-    {
-      id: "4",
-      name: "Google",
-      icon: "zap",
-      link: "https://zapit.live/",
-    },
+    
     {
       id: "1",
       name: "Nostrnet",
       icon: "layout-panel-left",
       link: "https://nostrnet.work/",
     },
-    {
-      id: "6",
-      name: "Bookmark",
-      icon: "settings",
-      link: "/lists.html",
-    },
+    
 
     {
       id: "5",
@@ -72,8 +62,8 @@ const CONFIG = {
     {
       id: "3",
       name: "Notes",
-      icon: "file-plus-2",
-      link: "https://notes.nostrnet.work",
+      icon: "settings",
+      link: "/lists.html",
     },
     {
       id: "2",

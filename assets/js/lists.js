@@ -49,6 +49,8 @@ function addLink() {
   }
 }
 
+
+
 function createLinkContainer(link) {
   const linkDiv = document.createElement("div");
   linkDiv.className = "link-container";
@@ -63,8 +65,31 @@ function createLinkContainer(link) {
 
   linkDiv.appendChild(linkButton);
 
+  // Fetch icon and append it to the link container
+  fetchIcon(link.url)
+    .then((iconURL) => {
+      const icon = document.createElement("img");
+      icon.src = iconURL;
+      icon.alt = `${link.title} Icon`;
+      icon.className = "link-icon";
+      linkDiv.insertBefore(icon, linkButton); // Insert icon before the button
+    })
+    .catch((error) => {
+      console.error("Error fetching icon:", error);
+    });
+
   return linkDiv;
 }
+
+function fetchIcon(url) {
+  const urlWithoutProtocol = url.replace(/^https?:\/\//, ""); // Remove "https://" or "http://"
+  const iconURL = `https://icon.horse/icon/${urlWithoutProtocol}`;
+  return Promise.resolve(iconURL);
+}
+
+
+
+
 
 function loadLinks() {
   const linkContainer = document.getElementById("linksContainer");
@@ -73,20 +98,90 @@ function loadLinks() {
   // If localStorage is empty, add default links
   if (links.length === 0) {
     const defaultLinks = [
-      { id: "bard-embed", url: "https://bard.google.com/", title: "Bard", active: false },
-      { id: "chatgpt-embed", url: "https://chat.openai.com/", title: "ChatGPT", active: false },
-      { id: "habla-embed", url: "https://habla.news/", title: "Habla", active: false },
-      { id: "perplexity-embed", url: "https://www.perplexity.ai/", title: "Perplexity", active: false },
-      { id: "archive-embed", url: "https://archive.org/", title: "Archive", active: false },
-      { id: "nostrbuild-embed", url: "https://nostr.build/", title: "Nostr.Build", active: false },
-      { id: "nostrband-embed", url: "https://nostr.band/", title: "Nostr.Band", active: false },
-      { id: "nostrudel-embed", url: "https://nostrudel.ninja/", title: "noStrudel", active: false },
-      { id: "satellite-embed", url: "https://satellite.earth/", title: "Satellite", active: false },
-      { id: "snort-embed", url: "https://snort.social/notes", title: "Snort", active: false },
-      { id: "stacker-embed", url: "https://stacker.news/", title: "Stacker", active: false },
-      { id: "stemstr-embed", url: "https://www.stemstr.app/", title: "Stemstr", active: false },
-      { id: "oddbean-embed", url: "https://oddbean.com/", title: "Oddbean", active: false },
-      { id: "zaplife-embed", url: "https://zaplife.lol/", title: "Zaplife", active: false },
+      {
+        id: "bard-embed",
+        url: "https://bard.google.com/",
+        title: "Bard",
+        active: false,
+      },
+      {
+        id: "chatgpt-embed",
+        url: "https://chat.openai.com/",
+        title: "ChatGPT",
+        active: false,
+      },
+      {
+        id: "habla-embed",
+        url: "https://habla.news/",
+        title: "Habla",
+        active: false,
+      },
+      {
+        id: "perplexity-embed",
+        url: "https://www.perplexity.ai/",
+        title: "Perplexity",
+        active: false,
+      },
+      {
+        id: "archive-embed",
+        url: "https://archive.org/",
+        title: "Archive",
+        active: false,
+      },
+      {
+        id: "nostrbuild-embed",
+        url: "https://nostr.build/",
+        title: "Nostr.Build",
+        active: false,
+      },
+      {
+        id: "nostrband-embed",
+        url: "https://nostr.band/",
+        title: "Nostr.Band",
+        active: false,
+      },
+      {
+        id: "nostrudel-embed",
+        url: "https://nostrudel.ninja/",
+        title: "noStrudel",
+        active: false,
+      },
+      {
+        id: "satellite-embed",
+        url: "https://satellite.earth/",
+        title: "Satellite",
+        active: false,
+      },
+      {
+        id: "snort-embed",
+        url: "https://snort.social/notes",
+        title: "Snort",
+        active: false,
+      },
+      {
+        id: "stacker-embed",
+        url: "https://stacker.news/",
+        title: "Stacker",
+        active: false,
+      },
+      {
+        id: "stemstr-embed",
+        url: "https://www.stemstr.app/",
+        title: "Stemstr",
+        active: false,
+      },
+      {
+        id: "oddbean-embed",
+        url: "https://oddbean.com/",
+        title: "Oddbean",
+        active: false,
+      },
+      {
+        id: "zaplife-embed",
+        url: "https://zaplife.lol/",
+        title: "Zaplife",
+        active: false,
+      },
       { title: "DuckDuckGo", url: "https://start.duckduckgo.com/" },
       { title: "NostrSync", url: "https://nostrsync.live/" },
       { title: "Hacker News", url: "https://news.ycombinator.com/" },
@@ -98,7 +193,7 @@ function loadLinks() {
       { title: "GitHub", url: "https://github.com/" },
       { title: "Memo Ai", url: "https://www.recordergo.app/" },
       { title: "Wikipedia", url: "https://wikipedia.org/" },
-      { title: "Ontolo", url: "https://www.ontolo.social/" }
+      { title: "Ontolo", url: "https://www.ontolo.social/" },
     ];
 
     links = defaultLinks;
