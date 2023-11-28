@@ -16,14 +16,18 @@
 	
 
 	<body class="">
-		<button id="themeButton">
-			<i id="themeIcon" icon-name="moon"></i>
-		</button>
-		<img src="/assets/icons/icon.png" alt=" Logo" class="logo">
+		
 		
 
 		
 		<div class="container">
+			<button id="themeButton">
+				<i id="themeIcon" icon-name="moon"></i>
+			</button>
+			
+			<div class="logoText">
+				<a>WebStash</a>
+			</div>
 			
 			
 
@@ -120,8 +124,8 @@
 				document.getElementById('dialog').style.display = 'none';
 			} else {
 				// App is not in standalone mode, show the dialog
-				document.getElementById('dialog').style.display = 'block';
-				 document.getElementById('overlay').style.display = 'block';
+				document.getElementById('dialog').style.display = 'none';
+				 document.getElementById('overlay').style.display = 'none';
 			}
 			function closeDialog() {
 					document.getElementById('dialog').style.display = 'none';
