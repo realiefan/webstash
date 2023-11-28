@@ -22,6 +22,11 @@ body {
     /* Center the container horizontally */
 }
 
+.menu-icon {
+
+}
+
+
 #linksContainer {
     display: grid;
     grid-template-columns: 100px 1fr;
@@ -48,16 +53,15 @@ body {
         margin-top: 30px;
 
 }
-#addLinkButton {
-background-color: #2b282c;
+.menu-icon {
+    margin-top: 2px;
     color: #d6d5d5;
-    padding: 6px 8px;
+    padding: 10px 8px;
     border: none;
     cursor: pointer;
     font-size: 15px;
-    border-radius: 9999px;
     font-weight: 600;
-    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+
 }
 
 #addLinkButton:hover {
@@ -72,37 +76,13 @@ button {
     border: none;
     cursor: pointer;
     font-size: 20px;
-    border-radius: 9999px;
+    border-radius: 16px;
     font-weight: 600;
     box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
 }
 
 
 
-
-.delete {
-    background-color: #2b282c;
-    color: #d6d5d5;
-    padding: 6px 8px;
-    border: none;
-    cursor: pointer;
-    font-size: 15px;
-    border-radius: 9999px;
-    font-weight: 600;
-    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
-}
-
-#homeButton {
-    background-color: #2b282c;
-        color: #d6d5d5;
-        padding: 6px 8px;
-        border: none;
-        cursor: pointer;
-        font-size: 15px;
-        border-radius: 9999px;
-        font-weight: 600;
-        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
-}
 
 #backButton:hover {
     background-color: #333;
@@ -193,14 +173,3 @@ input:focus::placeholder {
     margin: 5px;
 }
 
-.BackupRestore {
-    background-color: #2b282c;
-        color: #d6d5d5;
-        padding: 6px 8px;
-        border: none;
-        cursor: pointer;
-        font-size: 15px;
-        border-radius: 9999px;
-        font-weight: 600;
-        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
-}

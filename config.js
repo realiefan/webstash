@@ -1,8 +1,6 @@
 
 
 const CONFIG = {
-
-
   // General
   name: "Nostrich",
   imageBackground: false,
@@ -44,14 +42,18 @@ const CONFIG = {
   // └─┘└─┘ ┴  ┴ └─┘┘└┘└─┘
 
   firstButtonsContainer: [
-    
     {
       id: "1",
-      name: "Nostrnet",
-      icon: "layout-panel-left",
-      link: "https://nostrnet.work/",
+      name: "nostrsync",
+      icon: "database-backup",
+      link: "https://nostrsync.live/",
     },
-    
+    {
+      id: "2",
+      name: "Nostrnet",
+      icon: "pen-square",
+      link: "https://notes.nostrnet.work/",
+    },
 
     {
       id: "5",
@@ -64,12 +66,6 @@ const CONFIG = {
       name: "Notes",
       icon: "settings",
       link: "/lists.html",
-    },
-    {
-      id: "2",
-      name: "nostrsync",
-      icon: "database-backup",
-      link: "https://nostrsync.live/",
     },
   ],
 
