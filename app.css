@@ -38,9 +38,9 @@
   /* Dark Colors  */
   --accent: #57a0d9;
   /* Hover color */
-  --background: #19171a;
+  --background: #212121;
   /* Background color */
-  --cards: #201e21;
+  --cards: black;
   /* Cards color */
 
   /* Fonts Color */
@@ -171,7 +171,7 @@ body {
 #googleSearch {
   padding: 5px 8px;
   width: 95%;
-  font-size: medium;
+  font-size: large;
   background-color: var(--cards);
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
   border: none;
@@ -442,6 +442,7 @@ button {
 }
 
 .link-icon {
+  
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -449,11 +450,13 @@ button {
   cursor: pointer;
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
   
+  
+  
 }
 
 .mainButton {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--background);
+  background-color: var(--cards);
   color: var(--fg);
   padding: 4px 1px;
   border: none;
