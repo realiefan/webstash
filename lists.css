@@ -22,9 +22,7 @@ body {
     /* Center the container horizontally */
 }
 
-.menu-icon {
 
-}
 
 
 #linksContainer {
@@ -40,6 +38,7 @@ body {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    animation: slideRight 0.5s ease-in-out forwards;
     /* Center the container horizontally */
 }
 
@@ -51,6 +50,7 @@ body {
         align-items: center;
         display: flex;
         margin-top: 30px;
+        animation: slideUp 0.5s ease-in-out forwards;
 
 }
 .menu-icon {
@@ -99,6 +99,8 @@ dialog {
     border: 2px solid #666;
     border-radius: 5px;
     width: 70%;
+    animation: slideUp 0.5s ease-in-out forwards;
+    margin-top: 40%;
 }
 
 input {
@@ -147,7 +149,7 @@ input:focus::placeholder {
     padding: 0px 3px;
     cursor: pointer;
     display: none;
-    font-size: large;
+    font-size: larger;
     
 }
 
@@ -172,4 +174,30 @@ input:focus::placeholder {
     font-size: 25px;
     margin: 5px;
 }
+
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translatex(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translatex(0);
+        opacity: 1;
+    }
+}
+
 
