@@ -1,14 +1,7 @@
-// ╔╗ ╔═╗╔╗╔╔╦╗╔═╗
-// ╠╩╗║╣ ║║║ ║ ║ ║
-// ╚═╝╚═╝╝╚╝ ╩ ╚═╝
-// ┌─┐┌─┐┌┐┌┌─┐┬┌─┐┬ ┬┬─┐┌─┐┌┬┐┬┌─┐┌┐┌
-// │  │ ││││├┤ ││ ┬│ │├┬┘├─┤ │ ││ ││││
-// └─┘└─┘┘└┘└  ┴└─┘└─┘┴└─┴ ┴ ┴ ┴└─┘┘└┘
+
 
 const CONFIG = {
-  // ┌┐ ┌─┐┌─┐┬┌─┐┌─┐
-  // ├┴┐├─┤└─┐││  └─┐
-  // └─┘┴ ┴└─┘┴└─┘└─┘
+
 
   // General
   name: "Nostrich",
@@ -52,41 +45,41 @@ const CONFIG = {
 
   firstButtonsContainer: [
     {
-      id: "1",
+      id: "4",
       name: "Google",
-      icon: "search",
-      link: "https://google.com/",
+      icon: "zap",
+      link: "https://zapit.live/",
     },
     {
-      id: "2",
+      id: "1",
       name: "Nostrnet",
-      icon: "network",
+      icon: "layout-panel-left",
       link: "https://nostrnet.work/",
     },
     {
-      id: "5",
+      id: "6",
       name: "Bookmark",
       icon: "settings",
       link: "/lists.html",
     },
 
     {
-      id: "4",
+      id: "5",
       name: "Calendar",
-      icon: "calendar",
+      icon: "calendar-check-2",
       link: "https://cal.nostrnet.work",
     },
     {
       id: "3",
-      name: "Twiter",
-      icon: "twitter",
-      link: "https://twitter.com/home",
+      name: "Notes",
+      icon: "file-plus-2",
+      link: "https://notes.nostrnet.work",
     },
     {
-      id: "6",
-      name: "YouTube",
-      icon: "youtube",
-      link: "https://www.youtube.com/",
+      id: "2",
+      name: "nostrsync",
+      icon: "database-backup",
+      link: "https://nostrsync.live/",
     },
   ],
 
