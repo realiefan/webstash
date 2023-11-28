@@ -35,7 +35,7 @@
 				
 				<div class="searchBar">
 					<input type="text" id="googleSearch" placeholder="Search on Web...">
-					<button class="search" onclick="performGoogleSearch()">Search</button>
+					
 					
 				</div>
 				
@@ -114,8 +114,8 @@
 				document.getElementById('dialog').style.display = 'none';
 			} else {
 				// App is not in standalone mode, show the dialog
-				document.getElementById('dialog').style.display = 'block';
-				 document.getElementById('overlay').style.display = 'block';
+				document.getElementById('dialog').style.display = 'none';
+				 document.getElementById('overlay').style.display = 'none';
 			}
 			function closeDialog() {
 					document.getElementById('dialog').style.display = 'none';
