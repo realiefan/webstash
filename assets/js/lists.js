@@ -72,6 +72,13 @@ function createLinkContainer(link) {
       icon.src = iconURL;
       icon.alt = `${link.title} Icon`;
       icon.className = "link-icon";
+
+      // Modify the event listener for the icon
+      icon.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent the default behavior of following the link
+        window.location.href = link.url; // Manually set the window location to the link's URL
+      });
+
       linkDiv.insertBefore(icon, linkButton); // Insert icon before the button
     })
     .catch((error) => {
@@ -80,6 +87,7 @@ function createLinkContainer(link) {
 
   return linkDiv;
 }
+
 
 function fetchIcon(url) {
   const urlWithoutProtocol = url.replace(/^https?:\/\//, ""); // Remove "https://" or "http://"
