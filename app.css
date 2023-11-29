@@ -13,19 +13,12 @@
   --icon: 3vh;
   /* Icon Size */
 
-  /* Fonts Color */
-  --fg: #3a3a3a;
+ 
   /* Foreground color */
   --sfg: #494949;
   /* Secondary Foreground color */
 
-  /* Light Colors  */
-  --accent: #57a0d9;
-  /* Hover color */
-  --background: #f5f5f5;
-  /* Background color */
-  --cards: #e4e6e6;
-  /* Cards color */
+
 
   /* Image background  */
   --imgbg: url(assets/background.jpg);
@@ -67,10 +60,11 @@
 body {
   width: 100vw;
   height: 100vh;
-  background-color: var(--background);
+  background-color: #212121;
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .logoText {
@@ -88,18 +82,22 @@ body {
   cursor: pointer;
   font-size: 25px;
   font-weight: 600;
+  animation: slideDown 0.5s ease-in-out forwards;
+  
 }
 
-.logo a {
+.logoText a {
   /* Reset the background-clip for the <a> element */
   background-clip: initial;
   /* Set the color to the desired color for the text */
-  color: white;
+  
   /* Adjust the color to your preference */
   text-decoration: none;
-  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+  
   /* Optional: Remove the default underline for links */
 }
+
+
 
 
 
@@ -118,10 +116,11 @@ body {
   margin: 1em 2em 0 0;
   right: 0;
   top: 0;
-  color: var(--fg);
+  color: #d8dee9;
   border: none;
   cursor: pointer;
   background-color: #00000000;
+  animation: slideRight 0.5s ease-in-out forwards;
 }
 
 #themeIcon {
@@ -131,7 +130,7 @@ body {
 
 /* Container styles */
 .container {
-  width: 145vh;
+  
   height: 85vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -139,13 +138,14 @@ body {
   grid-gap: 10px;
   padding: 10px;
   
+  
 }
 
 /* Heading styles */
 .heading h1 {
   font-size: 2em;
   margin-bottom: 10px;
-  color: var(--fg);
+  color: #d8dee9;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
@@ -153,7 +153,7 @@ body {
 
 /* Card styles */
 .card {
-  background-color: var(--cards);
+  background-color: black;
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
   border-radius: 20px;
 }
@@ -184,11 +184,11 @@ body {
   padding: 5px 6px;
   width: 95%;
   font-size: large;
-  background-color: var(--cards);
+  background-color: black;
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
   border: none;
   border-radius: 10px;
-  color: var(--fg);
+  color: #d8dee9;
   font-weight: 600;
   align-self: center;
   
@@ -211,13 +211,13 @@ body {
   margin: 20px;
   font-size: 15px;
   font-weight: 600;
-  background-color: var(--cards);
+  background-color: black;
     box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
     border: none;
     border-radius: 10px;
-    color: var(--fg);
+    color: #d8dee9;
     padding: 5px 10px;
-    color: var(--fg);
+    color: #d8dee9;
     width: 95%;
 }
 
@@ -250,7 +250,8 @@ body {
   grid-template-rows: repeat(1, 1fr);
   grid-gap: 10px;
   padding: 20px;
-  animation: slideRight 0.5s ease-in-out forwards;
+  animation: slideUp 0.5s ease-in-out forwards;
+
   }
   
   
@@ -265,7 +266,7 @@ body {
 .buttonIcon {
   width: var(--icon);
   height: var(--icon);
-  color: var(--fg);
+  color: #d8dee9;
 }
 
 .button__1 {
@@ -273,22 +274,27 @@ body {
   grid-column: 1;
   padding: 20px;
   
+  
 }
 .button__2 {
   grid-row: 1;
   grid-column: 2;
+  
 }
 .button__3 {
   grid-row: 1;
   grid-column: 4;
+  
 }
 .button__4 {
   grid-row: 2;
   grid-column: 2;
+
 }
 .button__5 {
   grid-row: 1;
   grid-column: 3;
+  
 }
 .button__6 {
   grid-row: 2;
@@ -296,10 +302,10 @@ body {
   
 }
 .button:hover {
-  background-color: var(--accent);
+  background-color: #57a0d9;
 }
 .button:hover svg {
-  stroke: var(--sfg);
+  stroke: #2c292e;
 }
 
 .listsContainer {
@@ -334,14 +340,14 @@ body {
 .listIcon {
   /* margin-top: 3vh; */
   margin-bottom: 2vh;
-  color: var(--fg);
+  color: #d8dee9;
   width: var(--icon);
   height: var(--icon);
 }
 .listItem {
   text-decoration: none;
   font-size: var(--fg-list);
-  color: var(--fg);
+  color: #d8dee9;
   margin-top: 1vh;
   padding: 8px 12px;
   border-radius: 5px;
@@ -350,8 +356,8 @@ body {
   width: 80%;
 }
 .listItem:hover {
-  background-color: var(--accent);
-  color: var(--sfg);
+  background-color: #57a0d9;
+  color: #2c292e;
 }
 
 #installButton {
@@ -431,8 +437,8 @@ body {
 
 button {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--background);
-  color: var(--fg);
+  background-color: #212121;
+  color: #d8dee9;
   padding: 8px 12px;
   border: none;
   cursor: pointer;
@@ -478,20 +484,32 @@ button {
   }
 }
 
-@keyframes slideLeft {
+@keyframes slideDown {
   from {
-      transform: translatex(0);
-      opacity: 1;
-    }
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 
   to {
-      transform: translatex(100%);
-      opacity: 0;
-    }
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .link-icon {
-  background-color: var(--background);
+  background-color: #212121;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -505,8 +523,8 @@ button {
 
 .mainButton {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--cards);
-  color: var(--fg);
+  background-color: black;
+  color: #d8dee9;
   padding: 4px 1px;
   border: none;
   cursor: pointer;
@@ -529,7 +547,7 @@ button {
   justify-content: center;
   align-items: center;
   margin: auto;
-  background-color: var(--cards);
+  background-color: black;
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
   border-radius: 20px;
   width: 95%;
@@ -558,7 +576,7 @@ button {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   background-color: var(--background);
+   background-color: #212121;
    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
    border-radius: 8px;
    max-width: 400px;

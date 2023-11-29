@@ -18,8 +18,17 @@
    
 
     <div>
+        
+        <div class="SubHeading">
+            <a>AppList Settings</a>
+        </div>
 
+        <section id="linksContainer">
+            <!-- Links will be dynamically added here -->
+        </section>
     <div class="button-container">
+        
+        
         <button id="addLinkButton" onclick="openLinkAddingDialog()">
             
             <i data-lucide="plus-circle" size="20px" class="menu-icon"></i>
@@ -30,18 +39,18 @@
         </button>
     
         <button class="delete" id="toggleDeleteButton">
-            <i data-lucide="x-circle" class="menu-icon"></i>
+            <i data-lucide="pen" class="menu-icon"></i>
         </button>
     
-        <button id="homeButton" onclick="goHome()">
-            <i data-lucide="home"  class="menu-icon"></i> 
-        </button>
+        
         
         
     </div>
-    <section id="linksContainer">
-        <!-- Links will be dynamically added here -->
-    </section>
+
+    <button id="homeButton" class="goHomeButton" onclick="goHome()">
+        <i data-lucide="x-circle" class="menu-icon"></i>
+    </button>
+    
 
     <dialog id="linkAddingDialog" class="linkAddingDialog">
         <div>
@@ -62,6 +71,14 @@
         <button id="restoreDataButton">Restore</button><br>
         <button id="Cancel" style="margin-top: 10px;" onclick="closeBackupRestoreDialog()">Cancel</button>
     </dialog>
+
+    <div class="SubHeading">
+        <a>Auto-Backup (soon)</a>
+    </div>
+
+    <div class="SubHeading">
+        <a>Wallet Settings (soon)</a>
+    </div>
     </div>
 
     <script src="/lists.js">

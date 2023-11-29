@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<title>NostrNet</title>
+		<title>WebStash</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -21,9 +21,13 @@
 
 		
 		<div class="container">
+			
 			<button id="themeButton">
-				<i id="themeIcon" icon-name="moon"></i>
+				<i id="themeIcon" icon-name="bot"></i>
 			</button>
+
+
+
 			
 			<div class="logoText">
 				<a>NostrNet</a>
@@ -124,8 +128,8 @@
 				document.getElementById('dialog').style.display = 'none';
 			} else {
 				// App is not in standalone mode, show the dialog
-				document.getElementById('dialog').style.display = 'block';
-				 document.getElementById('overlay').style.display = 'block';
+				document.getElementById('dialog').style.display = 'none';
+				 document.getElementById('overlay').style.display = 'none';
 			}
 			function closeDialog() {
 					document.getElementById('dialog').style.display = 'none';
