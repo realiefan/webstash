@@ -17,7 +17,7 @@ const CONFIG = {
       id: "1",
       name: "nostrsync",
       icon: "database-backup",
-      link: "https://nostrsync.live/nostrnet/nostrnet.html",
+      link: "https://nostrsync.live",
   
     },
     {
