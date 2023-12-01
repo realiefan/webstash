@@ -58,7 +58,7 @@ body {
     cursor: pointer;
     font-size: 25px;
     font-weight: 600;
-    animation: slideLeft 0.5s ease-in-out forwards;
+    animation: fade-in 1s ease-in-out;
 }
 
 
@@ -66,8 +66,8 @@ body {
     display: grid;
     grid-template-columns: 100px 1fr;
     gap: 10px;
-    padding: 20px;
-    padding-top: 20px;
+    padding: 0px;
+    padding-top: 10px;
     justify-content: center;
     align-items: center;
     max-width: 800px;
@@ -75,7 +75,7 @@ body {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    animation: slideLeft 0.5s ease-in-out forwards;
+    animation: fade-in 1s ease-in-out;
     /* Center the container horizontally */
 }
 
@@ -91,33 +91,58 @@ body {
 
 }
 .menu-icon {
-    margin-top: 2px;
-    color: #d6d5d5;
-    padding: 5px 6px;
+    
+    
+    padding: 5px 5px;
     border: none;
     cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
+  
+
     
 
 }
 
 #addLinkButton:hover {
-    background-color: #333;
+    background: rgb(77, 10, 149)616;
+}
+
+#addLinkButton {
+    background: linear-gradient(90deg, #7f7dd1, #548dd9 100%, #548dd9 0);
+    font-size: 0px;
+    color: #212121;
+    padding: 4px;
+}
+
+#backupRestoreButton {
+    background: linear-gradient(90deg, #a77cb4, #7f7dd1);
+    font-size: 0px;
+    color: #212121;
+    padding: 4px;
+
 }
 
 
+#toggleDeleteButton {
+    background: linear-gradient(90deg, #cf8d7c, #a77cb4);
+    font-size: 0px;
+    color: #212121;
+    
+    padding: 4px;
+}
 
 #homeButton {
+    background: linear-gradient(90deg, #7f7dd1, #548dd9 100%, #548dd9 0);
     position: absolute;
-    
+    font-size: 0px;
         margin: 5%;
-        margin-top: 0.7em;
+        
         right: 0;
         top: 0;
-        padding: 0 0;
+        padding: 0px;
         border-radius: 9999px;
-        animation: slideRight 0.5s ease-in-out forwards;
+        animation: fade-in 1s ease-in-out;
+        color: #212121;
+        
     
 }
 
@@ -143,6 +168,7 @@ button {
 
 button:hover {
     background-color: #333;
+    
 }
 
 dialog {
@@ -153,7 +179,7 @@ dialog {
     border-radius: 5px;
     width: 70%;
     animation: slideUp 0.5s ease-in-out forwards;
-    margin-top: 40%;
+
 }
 
 input {
@@ -196,10 +222,10 @@ input:focus::placeholder {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #201e21;
-    color: white;
+    
+    color:  #cf8d7c;
     border: none;
-    padding: 0px 3px;
+    padding: 0px 0px;
     cursor: pointer;
     display: none;
     font-size: larger;
@@ -227,6 +253,13 @@ input:focus::placeholder {
     font-size: 25px;
     margin: 5px;
 }
+
+ 
+
+
+
+
+
 
 
 @keyframes slideUp {
@@ -276,4 +309,15 @@ input:focus::placeholder {
         opacity: 1;
     }
 }
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 

@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<title>NostrNet</title>
+		<title>NostrWeb</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -30,7 +30,7 @@
 
 			
 			<div class="logoText">
-				<a>NostrNet</a>
+				<a>NostrWeb</a>
 			</div>
 			
 			
@@ -48,9 +48,14 @@
 				</div>
 			
 				<div class="linksBlock" id="linksBlock">
-					<div class="linksBlockLeft" id="linksBlockLeft"></div>
+					<div class="linksBlockLeft" id="linksBlockLeft"> </div>
+					
+					
 			
 				</div>
+				<!-- Add id to the button -->
+				
+
 			
 				<div id="linksContainer" class="links-container">
 					<!-- Links will be dynamically added here -->
@@ -80,12 +85,23 @@
 				<li>Tap the <strong>three dots</strong> in the top-right corner.</li>
 				<li>Customize the app name if needed and tap <strong>"Add to Home screen" or "Install"</strong>.</li>
 				</ol>
-			
+		
 				<!-- Display the "Install App" button if needed -->
 				
 			
 				
 			</div>
+			<div id="modal-container" class="modal-container">
+				<div class="modal-content">
+					<span class="close-modal" onclick="closeModal()">&times;</span>
+					<iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
+
+			
+			
+			<!-- Your button -->
+			
 			
 			
 
@@ -123,23 +139,27 @@
 
 		<script>
 			// Check if the app is in standalone mode
-			if (window.matchMedia('(display-mode: standalone)').matches) {
-				// App is in standalone mode, hide the dialog
-				document.getElementById('dialog').style.display = 'none';
-			} else {
-				// App is not in standalone mode, show the dialog
-				document.getElementById('dialog').style.display = 'block';
-				 document.getElementById('overlay').style.display = 'block';
-			}
-			function closeDialog() {
+			if (window.matchMedia('(display-mode: fullscreen)').matches) {
+					// App is in fullscreen mode, hide the dialog
 					document.getElementById('dialog').style.display = 'none';
+				} else if (window.matchMedia('(display-mode: standalone)').matches) {
+					// App is in standalone mode, hide the dialog
+					document.getElementById('dialog').style.display = 'none';
+				} else {
+					// App is not in fullscreen or standalone mode, show the dialog
+					document.getElementById('dialog').style.display = 'none';
+					document.getElementById('overlay').style.display = 'none';
 				}
+
 		</script>
 
 		<script>
 			window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
+
+		
+
 		
 
 

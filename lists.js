@@ -18,10 +18,25 @@ function closeLinkAddingDialog() {
 
 function addLink() {
   const title = document.getElementById("newLinkTitle").value;
-  const url = document.getElementById("newLinkURL").value;
+  let url = document.getElementById("newLinkURL").value;
+
+  // Ensure the URL starts with "https://"
+  if (!url.startsWith("https://")) {
+    url = "https://" + url;
+  }
 
   if (title && url) {
     const links = JSON.parse(localStorage.getItem("links")) || [];
+
+    // Check for duplicate links
+    const isDuplicate = links.some(
+      (link) => link.title === title || link.url === url
+    );
+    if (isDuplicate) {
+      alert("This link already exists.");
+      return;
+    }
+
     links.push({ title, url });
     localStorage.setItem("links", JSON.stringify(links));
 
@@ -41,6 +56,7 @@ function addLink() {
     alert("Please enter both link title and URL");
   }
 }
+
 
 function createLinkContainer(link) {
   const linkDiv = document.createElement("div");
