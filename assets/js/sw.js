@@ -1,13 +1,10 @@
-// Update the cache version whenever you make changes to cache logic
-const CACHE_VERSION = "v1";
-const CACHE = `NostrWeb-${CACHE_VERSION}`;
 
-// Path to the offline fallback page
+const CACHE = "NostrNet-V0.1";
+
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+
+// TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
 const offlineFallbackPage = "/offline.html";
-
-importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
-);
 
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
@@ -15,23 +12,10 @@ self.addEventListener("message", (event) => {
   }
 });
 
-self.addEventListener("install", async (event) => {
+self.addEventListener('install', async (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) => {
-      // Precache important assets here
-      return cache.addAll([
-        offlineFallbackPage,
-        "/index.html",
-        "/lists.html",
-        "/app.css",
-        "/lists.css",
-        "/lists.js",
-        "/assests/js/lists.js",
-        "/assests/js/search.js",
-        "/assests/js/layout.js",
-        // Add other assets here
-      ]);
-    })
+    caches.open(CACHE)
+      .then((cache) => cache.add(offlineFallbackPage))
   );
 });
 
@@ -40,31 +24,30 @@ if (workbox.navigationPreload.isSupported()) {
 }
 
 workbox.routing.registerRoute(
-  new RegExp("/*"),
+  new RegExp('/*'),
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: CACHE,
+    cacheName: CACHE
   })
 );
 
-self.addEventListener("fetch", (event) => {
-  if (event.request.mode === "navigate") {
-    event.respondWith(
-      (async () => {
-        try {
-          const preloadResp = await event.preloadResponse;
+self.addEventListener('fetch', (event) => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async () => {
+      try {
+        const preloadResp = await event.preloadResponse;
 
-          if (preloadResp) {
-            return preloadResp;
-          }
-
-          const networkResp = await fetch(event.request);
-          return networkResp;
-        } catch (error) {
-          const cache = await caches.open(CACHE);
-          const cachedResp = await cache.match(offlineFallbackPage);
-          return cachedResp;
+        if (preloadResp) {
+          return preloadResp;
         }
-      })()
-    );
+
+        const networkResp = await fetch(event.request);
+        return networkResp;
+      } catch (error) {
+
+        const cache = await caches.open(CACHE);
+        const cachedResp = await cache.match(offlineFallbackPage);
+        return cachedResp;
+      }
+    })());
   }
 });
