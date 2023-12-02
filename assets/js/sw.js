@@ -1,53 +1,58 @@
 
-const CACHE = "NostrNet-V0.1";
+const CACHE = "NostrNet-V0.2";
+// Import workbox
+importScripts(
+  "https://storage.googleapis.com/workbox-cdn/releases/7.0.0/workbox-sw.js"
+);
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+// Define caching strategies
+const staticCacheName = "static-v1";
+workbox.routing.registerRoute(
+  new RegExp(".*(js|html|css)"),
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: staticCacheName,
+    plugins: [
+      // Clear old cache entries on update
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+      }),
+    ],
+  })
+);
 
-// TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
-const offlineFallbackPage = "/offline.html";
+// Precache static assets
+workbox.precaching.precacheAndRoute([
+  { url: "/", revision: "1" },
+  { url: "/index.html", revision: "1" },
+  { url: "/app.css", revision: "1" },
+  { url: "/assets/js/lists.js", revision: "1" },
+]);
 
+// Fallback to network if cache fails
+workbox.routing.setCatchHandler(async ({ event }) => {
+  try {
+    // Fetch from network
+    const response = await fetch(event.request);
+    return response;
+  } catch (error) {
+    // Offline page
+    return new Response("Offline", {
+      status: 503,
+      headers: { "Content-Type": "text/plain" },
+    });
+  }
+});
+
+// Update cache on new versions
 self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
+  if (event.data === "cacheUpdated") {
     self.skipWaiting();
   }
 });
 
-self.addEventListener('install', async (event) => {
-  event.waitUntil(
-    caches.open(CACHE)
-      .then((cache) => cache.add(offlineFallbackPage))
-  );
-});
-
-if (workbox.navigationPreload.isSupported()) {
-  workbox.navigationPreload.enable();
-}
-
-workbox.routing.registerRoute(
-  new RegExp('/*'),
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: CACHE
-  })
-);
-
-self.addEventListener('fetch', (event) => {
-  if (event.request.mode === 'navigate') {
-    event.respondWith((async () => {
-      try {
-        const preloadResp = await event.preloadResponse;
-
-        if (preloadResp) {
-          return preloadResp;
-        }
-
-        const networkResp = await fetch(event.request);
-        return networkResp;
-      } catch (error) {
-
-        const cache = await caches.open(CACHE);
-        const cachedResp = await cache.match(offlineFallbackPage);
-        return cachedResp;
-      }
-    })());
-  }
+// Activate service worker and update cache
+self.addEventListener("activate", (event) => {
+  self.clients.claim();
+  event.waitUntil(workbox.precaching.cleanupOutdatedCaches());
 });
