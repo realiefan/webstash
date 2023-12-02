@@ -1,5 +1,5 @@
 
-const CACHE = "NostrNet-V0.2";
+const CACHE = "NostrNet-V1";
 // Import workbox
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/7.0.0/workbox-sw.js"
@@ -27,6 +27,12 @@ workbox.precaching.precacheAndRoute([
   { url: "/index.html", revision: "1" },
   { url: "/app.css", revision: "1" },
   { url: "/assets/js/lists.js", revision: "1" },
+  { url: "/assets/js/search.js", revision: "1" },
+  { url: "/lists.html", revision: "1" },
+  { url: "/lists.css", revision: "1" },
+  { url: "/lists.js", revision: "1" },
+  { url: "/assets/js/buttons.js", revision: "1" },
+  { url: "/assets/js/layout.js", revision: "1" },
 ]);
 
 // Fallback to network if cache fails
