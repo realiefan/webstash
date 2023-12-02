@@ -1,13 +1,13 @@
-// This is the service worker with the combined offline experience (Offline page + Offline copy of pages)
+// Update the cache version whenever you make changes to cache logic
+const CACHE_VERSION = "v1";
+const CACHE = `NostrWeb-${CACHE_VERSION}`;
 
-const CACHE = "NostrWeb";
+// Path to the offline fallback page
+const offlineFallbackPage = "/offline.html";
 
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
 );
-
-// TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
-const offlineFallbackPage = "/offline.html";
 
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
@@ -17,7 +17,21 @@ self.addEventListener("message", (event) => {
 
 self.addEventListener("install", async (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.add(offlineFallbackPage))
+    caches.open(CACHE).then((cache) => {
+      // Precache important assets here
+      return cache.addAll([
+        offlineFallbackPage,
+        "/index.html",
+        "/lists.html",
+        "/app.css",
+        "/lists.css",
+        "/lists.js",
+        "/assests/js/lists.js",
+        "/assests/js/search.js",
+        "/assests/js/layout.js",
+        // Add other assets here
+      ]);
+    })
   );
 });
 
