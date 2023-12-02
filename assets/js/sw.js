@@ -1,12 +1,10 @@
-
-const CACHE = "NostrNet-V0.2";
 // Import workbox
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/7.0.0/workbox-sw.js"
 );
 
 // Define caching strategies
-const staticCacheName = "static-v1";
+const staticCacheName = "static-v1.2";
 workbox.routing.registerRoute(
   new RegExp(".*(js|html|css)"),
   new workbox.strategies.StaleWhileRevalidate({
