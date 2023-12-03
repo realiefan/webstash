@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Load links from localStorage or add defaults
   loadLinks();
+  
 
   // Attach event listener for toggleDeleteButtons
 });
@@ -98,54 +99,66 @@ function fetchIcon(url) {
 
 
 
-
 function loadLinks() {
   const linkContainer = document.getElementById("linksContainer");
-  let links = JSON.parse(localStorage.getItem("links")) || [];
+  let links = loadLinksFromLocalStorage();
 
-  // If localStorage is empty, add default links
   if (links.length === 0) {
-    const defaultLinks = [
-  {"url":"https://bard.google.com/","title":"Bard"},
-  {"url":"https://habla.news/","title":"Habla"},
-  {"url":"https://www.perplexity.ai/","title":"Perplexity"},
-  {"url":"https://archive.org/","title":"Archive"},
-  {"url":"https://nostr.build/","title":"Nostr.Build"},
-  {"url":"https://nostr.band/","title":"Nostr.Band"},
-  {"url":"https://nostrudel.ninja/","title":"noStrudel"},
-  {"url":"https://satellite.earth/","title":"Satellite"},
-  {"url":"https://snort.social/notes","title":"Snort"},
-  {"url":"https://stacker.news/","title":"Stacker"},
-  {"url":"https://www.stemstr.app/","title":"Stemstr"},
-  {"url":"https://oddbean.com/","title":"Oddbean"},
-  {"url":"https://zaplife.lol/","title":"Zaplife"},
-  {"title":"DuckDuckGo","url":"https://start.duckduckgo.com/"},
-  {"title":"Hacker News","url":"https://news.ycombinator.com/"},
-  {"title":"Brave","url":"https://search.brave.com/"},
-  {"title":"X","url":"https://twitter.com/"},
-  {"title":"Reddit","url":"https://www.reddit.com/"},
-  {"title":"Wormhole","url":"https://wormhole.app/"},
-  {"title":"GitHub","url":"https://github.com/"},
-  {"title":"Memo Ai","url":"https://www.recordergo.app/"},
-  {"title":"Wikipedia","url":"https://wikipedia.org/"},
-  {"title":"Ontolo","url":"https://www.ontolo.social/"},
-  {"title":"Shopstr","url":"https://shopstr.store/"},
-  {"title":"UnleashedChat","url":"https://unleashed.chat/"},
-  {"title":"ProtonMail","url":"https://mail.proton.me/"},
-  {"title":"NostrApps","url":"https://nostrapp.link/"}
-]
-
-
-
-    links = defaultLinks;
-    localStorage.setItem("links", JSON.stringify(defaultLinks));
+    links = setDefaultLinks();
   }
 
-  // Sort links alphabetically by title
-  links.sort((a, b) => a.title.localeCompare(b.title));
+  sortLinksAlphabetically(links);
 
   links.forEach((link) => {
     const linkDiv = createLinkContainer(link);
     linkContainer.appendChild(linkDiv);
   });
+
+
+
 }
+
+function loadLinksFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("links")) || [];
+}
+
+function setDefaultLinks() {
+  const defaultLinks = [
+    { url: "https://bard.google.com/", title: "Bard" },
+    { url: "https://habla.news/", title: "Habla" },
+    { url: "https://www.perplexity.ai/", title: "Perplexity" },
+    { url: "https://archive.org/", title: "Archive" },
+    { url: "https://nostr.build/", title: "Nostr.Build" },
+    { url: "https://nostr.band/", title: "Nostr.Band" },
+    { url: "https://nostrudel.ninja/", title: "noStrudel" },
+    { url: "https://satellite.earth/", title: "Satellite" },
+    { url: "https://snort.social/notes", title: "Snort" },
+    { url: "https://stacker.news/", title: "Stacker" },
+    { url: "https://www.stemstr.app/", title: "Stemstr" },
+    { url: "https://oddbean.com/", title: "Oddbean" },
+    { url: "https://zaplife.lol/", title: "Zaplife" },
+    { title: "DuckDuckGo", url: "https://start.duckduckgo.com/" },
+    { title: "Hacker News", url: "https://news.ycombinator.com/" },
+    { title: "Brave", url: "https://search.brave.com/" },
+    { title: "X", url: "https://twitter.com/" },
+    { title: "Reddit", url: "https://www.reddit.com/" },
+    { title: "Wormhole", url: "https://wormhole.app/" },
+    { title: "GitHub", url: "https://github.com/" },
+    { title: "Memo Ai", url: "https://www.recordergo.app/" },
+    { title: "Wikipedia", url: "https://wikipedia.org/" },
+    { title: "Ontolo", url: "https://www.ontolo.social/" },
+    { title: "Shopstr", url: "https://shopstr.store/" },
+    { title: "UnleashedChat", url: "https://unleashed.chat/" },
+    { title: "ProtonMail", url: "https://mail.proton.me/" },
+    { title: "NostrApps", url: "https://nostrapp.link/" },
+  ];
+
+  localStorage.setItem("links", JSON.stringify(defaultLinks));
+  return defaultLinks;
+}
+
+function sortLinksAlphabetically(links) {
+  links.sort((a, b) => a.title.localeCompare(b.title));
+}
+
+

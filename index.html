@@ -11,6 +11,8 @@
 		<link rel=" shortcut icon" type="image/png" href="/assests/icons/icon.png" />
 		<link rel="stylesheet" href="app.css" />
 		<script src="https://unpkg.com/lucide@latest"></script>
+		
+		
 	</head>
 
 	
@@ -55,11 +57,28 @@
 				</div>
 				<!-- Add id to the button -->
 				
-
-			
-				<div id="linksContainer" class="links-container">
-					<!-- Links will be dynamically added here -->
+				
+				<div class="apps">
+				<div id="linksContainer">
+					
+					
 				</div>
+
+				<div class="center-container">
+					<a href="lists.html">
+						
+							<i data-lucide="plus-circle" class="menu-icon"></i> </a>
+					
+				</div>
+				</div>
+
+
+				
+				
+
+
+				
+				
 
 			
 			</div>
@@ -91,16 +110,6 @@
 			
 				
 			</div>
-			
-
-			
-			
-			<!-- Your button -->
-			
-			
-			
-
-			
 			
 
 		</div>
@@ -142,8 +151,8 @@
 					document.getElementById('dialog').style.display = 'none';
 				} else {
 					// App is not in fullscreen or standalone mode, show the dialog
-					document.getElementById('dialog').style.display = 'block';
-					document.getElementById('overlay').style.display = 'block';
+					document.getElementById('dialog').style.display = 'none';
+					document.getElementById('overlay').style.display = 'none';
 				}
 
 		</script>

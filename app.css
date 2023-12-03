@@ -24,6 +24,8 @@
   --imgbg: url(assets/background.jpg);
   /* Image URL */
   --imgcol: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7));
+
+
   /* Filter color */
 }
 
@@ -306,7 +308,7 @@ body {
   
 }
 .button:hover {
-  background-color: #57a0d9;
+  background: linear-gradient(90deg, #7f7dd1, #548dd9 100%, #548dd9 0);
 }
 .button:hover svg {
   stroke: #2c292e;
@@ -446,7 +448,7 @@ button {
   padding: 8px 12px;
   border: none;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 9999px;
   font-weight: 600;
   white-space: nowrap;
@@ -531,10 +533,10 @@ button {
   border-radius: 50%;
   margin-bottom: 5px;
   cursor: pointer;
-  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
-  
-  
-  
+  box-shadow: 0 5px 7px rgba(59, 58, 58, 0.35);
+  border: 2px solid ;
+  border-color:  #8383c1;
+  /* Add your desired border color here */
 }
 
 .mainButton {
@@ -553,33 +555,64 @@ button {
   display: inline-block;
   text-align: center;
   width: 100%;
-  
- 
-  
-  
-  
 }
 
 #linksContainer {
-  gap: 15px;
-  padding: 10px;
+  gap: 10px;
+  padding: 5px;
   justify-content: center;
   align-items: center;
   margin: auto;
-  background-color: black;
-  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
-  border-radius: 20px;
   width: 95%;
+  
   
   /* Set min-height to 100vh to center vertically */
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
   animation: fade-in 1s ease-in-out;
-  
-  
 
 }
+
+.apps {
+  background-color: black;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+   
+  
+}
+
+
+
+
+.center-container {
+  text-align: center;
+  
+}
+
+.center-container a {
+  display: inline-block;
+  
+}
+
+
+.menu-icon {
+
+
+  background: linear-gradient(90deg, #7f7dd1, #548dd9 100%, #548dd9 0);
+  border-radius: 9999px;
+  font-size: larger;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+
+  padding: 1px;
+  color: #1e1e1e;
+   animation: fade-in 1s ease-in-out;
+
+
+}
+
+
+
 #overlay {
   display: none;
   position: fixed;

@@ -21,14 +21,14 @@ const CONFIG = {
   
     },
     {
-      id: "2",
+      id: "5",
       name: "Nostrnet",
       icon: "pen-square",
       link: "https://notes.nostrnet.work/",
     },
 
     {
-      id: "5",
+      id: "2",
       name: "Calendar",
       icon: "calendar-check-2",
       link: "https://cal.nostrnet.work",
