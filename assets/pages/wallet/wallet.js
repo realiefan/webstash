@@ -114,7 +114,7 @@ function openWallet(buttonType) {
         break;
     }
   } else {
-    alert("No wallet details found. Save wallet details first.");
+    alert("No wallet details found. Click on 'Key icon' on (top-right corner) & Save wallet details first.");
   }
 }
 
