@@ -1,5 +1,5 @@
 
-const CACHE = "NostrNet-V0.2";
+const CACHE = "NostrNet-V0.1";
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 

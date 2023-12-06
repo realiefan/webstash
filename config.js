@@ -7,10 +7,7 @@ const CONFIG = {
   openInNewTab: false,
 
   // Layout
-  bentoLayout: "bento", 
-
-
-
+  bentoLayout: "bento",
 
   firstButtonsContainer: [
     {
@@ -18,7 +15,6 @@ const CONFIG = {
       name: "nostrsync",
       icon: "database-backup",
       link: "https://nostrsync.live/",
-  
     },
     {
       id: "5",
@@ -35,10 +31,9 @@ const CONFIG = {
     },
     {
       id: "3",
-      name: "Notes",
-      icon: "settings",
-      link: "/lists.html",
+      name: "Zap",
+      icon: "zap",
+      link: "/assets/pages/wallet/wallet.html",
     },
   ],
-
 };

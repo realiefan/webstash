@@ -14,7 +14,6 @@ function closeLinkAddingDialog() {
   document.getElementById("linkAddingDialog").close();
 }
 
-
 function addLink() {
   const title = document.getElementById("newLinkTitle").value;
   const url = document.getElementById("newLinkURL").value;

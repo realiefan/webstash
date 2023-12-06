@@ -1,7 +1,4 @@
-// ┌┬┐┬┌┬┐┌─┐
-//  │ ││││├┤
-//  ┴ ┴┴ ┴└─┘
-// Set time and Date
+
 
 window.onload = displayClock();
 function displayClock() {

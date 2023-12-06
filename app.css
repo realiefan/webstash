@@ -175,7 +175,7 @@ body {
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
-  
+  animation: fade-in 1s ease-in-out;
   
  
   }
@@ -221,6 +221,7 @@ body {
     padding: 5px 10px;
     color: #d8dee9;
     width: 95%;
+    
 }
 
 
@@ -468,53 +469,7 @@ button {
   
 }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
 
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideRight {
-  from {
-    transform: translatex(100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translatex(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideLeft {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 
 @keyframes fade-in {
   from {
@@ -543,7 +498,7 @@ button {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: black;
   color: #d8dee9;
-  padding: 4px 1px;
+  padding: 1px 1px;
   border: none;
   cursor: pointer;
   font-size: 12px;
@@ -555,6 +510,7 @@ button {
   display: inline-block;
   text-align: center;
   width: 100%;
+
 }
 
 #linksContainer {
@@ -564,9 +520,6 @@ button {
   align-items: center;
   margin: auto;
   width: 95%;
-  
-  
-  /* Set min-height to 100vh to center vertically */
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
@@ -578,6 +531,7 @@ button {
   background-color: black;
     box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
     border-radius: 20px;
+    animation: fade-in 1s ease-in-out;
    
   
 }
