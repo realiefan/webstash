@@ -74,49 +74,53 @@ function openWallet(buttonType) {
 
     switch (buttonType) {
       case "connect":
-        window.open(
-          walletData.walletLink.replace("wallet", "lndhub"),
-          "_blank"
+        window.location.href = walletData.walletLink.replace(
+          "wallet",
+          "lndhub"
         );
         break;
       case "paywall":
-        window.open(
-          walletData.walletLink.replace("wallet", "paywall"),
-          "_blank"
+        window.location.href = walletData.walletLink.replace(
+          "wallet",
+          "paywall"
         );
         break;
       case "market":
-        window.open(
-          walletData.walletLink.replace("wallet", "market"),
-          "_blank"
+        window.location.href = walletData.walletLink.replace(
+          "wallet",
+          "market"
         );
         break;
       case "vouchers":
-        window.open(
-          walletData.walletLink.replace("wallet", "vouchers"),
-          "_blank"
+        window.location.href = walletData.walletLink.replace(
+          "wallet",
+          "vouchers"
         );
         break;
       case "splitpayments":
-        window.open(
-          walletData.walletLink.replace("wallet", "splitpayments"),
-          "_blank"
+        window.location.href = walletData.walletLink.replace(
+          "wallet",
+          "splitpayments"
         );
         break;
       case "withdraw":
-        window.open(
-          walletData.walletLink.replace("wallet", "withdraw/"),
-          "_blank"
+        window.location.href = walletData.walletLink.replace(
+          "wallet",
+          "withdraw/"
         );
         break;
       case "cashu":
-        window.open(walletData.walletLink.replace("wallet", "cashu"), "_blank");
+        window.location.href = walletData.walletLink.replace("wallet", "cashu");
         break;
     }
   } else {
-    alert("No wallet details found. Click on 'Key icon' on (top-right corner) & Save wallet details first.");
+    alert(
+      "No wallet details found. Click on 'Key icon' on (top-right corner) & Save wallet details first."
+    );
   }
 }
+
+
 
 
 async function fetchWalletBalance() {
