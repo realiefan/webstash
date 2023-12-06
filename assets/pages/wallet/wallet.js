@@ -78,6 +78,11 @@ function openWallet(buttonType) {
           "wallet",
           "lndhub"
         );
+      case "wallet":
+        window.location.href = walletData.walletLink.replace(
+          "wallet",
+          "wallet"
+        );
         break;
       case "paywall":
         window.location.href = walletData.walletLink.replace(
