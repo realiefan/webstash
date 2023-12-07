@@ -35,7 +35,7 @@
   /* Hover color */
   --background: #212121;
   /* Background color */
-  --cards: black;
+  --cards: #131314;
   /* Cards color */
 
   /* Fonts Color */
@@ -155,7 +155,7 @@ body {
 
 /* Card styles */
 .card {
-  background-color: black;
+  background-color: #131314;
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
   border-radius: 20px;
 }
@@ -165,7 +165,23 @@ body {
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.35);
 }
 
-/* Time block styles */
+.divider {
+  position: relative;
+  margin: 10px;
+  height: 1px;
+}
+
+.div-transparent:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  width: 90%;
+  height: 1px;
+
+  background-image: linear-gradient(to right, transparent, rgb(237, 240, 245), transparent);
+}
 
 
 /* Search bar styles */
@@ -186,7 +202,7 @@ body {
   padding: 5px 6px;
   width: 95%;
   font-size: large;
-  background-color: black;
+  background-color: #131314;
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
   border: none;
   border-radius: 10px;
@@ -213,7 +229,7 @@ body {
   margin: 20px;
   font-size: 15px;
   font-weight: 600;
-  background-color: black;
+  background-color: #131314;
     box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
     border: none;
     border-radius: 10px;
@@ -496,7 +512,7 @@ button {
 
 .mainButton {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: black;
+  background-color: #131314;
   color: #d8dee9;
   padding: 1px 1px;
   border: none;
@@ -520,6 +536,7 @@ button {
   align-items: center;
   margin: auto;
   width: 95%;
+
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
@@ -528,7 +545,7 @@ button {
 }
 
 .apps {
-  background-color: black;
+  background-color: #131314;
     box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
     border-radius: 20px;
     animation: fade-in 1s ease-in-out;
@@ -640,43 +657,7 @@ button {
  }
 
 
- 
 
-
- /* Style for the modal container */
- .modal {
-
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.5);
-   align-items: center;
-   justify-content: center;
-   z-index: 1000;
-   display: flex;
- }
-
- /* Style for the iframe inside the modal */
- .modal iframe {
-   border: none;
-   width: 80vw;
-   /* Adjust the width as needed */
-   height: 60vh;
-   /* Adjust the height as needed */
- }
-
- /* Style for the close button */
- .modal button {
-   position: absolute;
-   top: 10px;
-   right: 10px;
-   padding: 10px;
-   background-color: #fff;
-   border: 1px solid #ccc;
-   cursor: pointer;
- }
 
  /* Optional: Add transition effect for the modal */
  .modal {

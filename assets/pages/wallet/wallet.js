@@ -139,6 +139,11 @@ function openWallet(buttonType) {
 }
 
 
+ function openLink() {
+   // Replace 'your-link-url' with the actual URL you want to open
+   window.location.href = "/";
+ }
+
 
 
 async function fetchWalletBalance() {

@@ -28,13 +28,15 @@ body {
     transform: translate(-50%, -50%);
     z-index: 1;
     width: 90%;
+
+    
 }
 
 .modal-content {
     background-color: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px 20px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
@@ -59,9 +61,19 @@ body {
     background-color: #00000000;
 }
 
+.home-container {
+    position: absolute;
+    margin: 1em 2em;
+    left: 0;
+    top: 0;
+    color: #d8dee9;
+    border: none;
+    cursor: pointer;
+    background-color: #00000000;
+}
+
 .login-container button {
     padding: 10px;
-    background-color: #61dafb;
     border: none;
     border-radius: 4px;
     outline: none;
@@ -128,7 +140,7 @@ body {
     margin: 5px;
     padding: 18px 24px;
     cursor: pointer;
-    background-color: black;
+    background-color: #131314;
     color: #d1cfcf;
     border: none;
     border-radius: 6px;
@@ -139,7 +151,7 @@ body {
 }
 
 .openWalletButton:hover {
-    background-color: #4fa3d1;
+    background-color: #f7931a;
 }
 
 #loginButton {
@@ -151,7 +163,19 @@ body {
     border-radius: 4px;
     outline: none;
     transition: background-color 0.3s;
-    color: #d1cfcf;
+    color: #f7931a;
+}
+
+#homeButton {
+    padding: 10px 16px;
+    cursor: pointer;
+    background-color: #212121;
+    color: #121212;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    transition: background-color 0.3s;
+    color: #7f7dd1;
 }
 
 
@@ -161,7 +185,7 @@ body {
     font-weight: 600;
         padding: 5px 8px;
         cursor: pointer;
-        background-color: black;
+        background-color: #131314;
         color: #d1cfcf;
         border: none;
         border-radius: 6px;

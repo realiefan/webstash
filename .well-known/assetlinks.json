@@ -1,8 +1,0 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "work.nostrnet.app.twa",
-        "sha256_cert_fingerprints": ["0C:03:AE:CB:E8:B6:A1:CC:FE:26:0F:59:41:11:32:98:A5:44:64:0D:65:FC:62:06:67:2A:2B:56:9E:D2:56:C8"]
-      }
-    }]

@@ -145,7 +145,7 @@ body {
 
 button {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: black;
+    background-color: #131314;
     color: #d6d5d5;
     padding: 8px 8px;
     border: none;
@@ -169,30 +169,66 @@ button:hover {
 }
 
 dialog {
-    background-color: #444;
-    color: #ffffff;
-    padding: 10px;
-    border: 2px solid #666;
-    border-radius: 5px;
-    width: 70%;
+    background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 30px 20px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        width: 90%;
+        bottom: 30%;
+        max-width: 440px;
+
     animation: slideUp 0.5s ease-in-out forwards;
 
 }
 
+dialog button {
+    margin-top: 15px;
+    padding: 8px 12px;
+    cursor: pointer;
+
+    color: #d6d4d4;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+
+}
+
+dialog button:hover {
+    background: linear-gradient(90deg, #5e5cd5, #226ed2 100%, #126ce1 0);
+}
+
 input {
-    padding: 10px;
+    width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-top: 5px;
+        background-color: #000000;
+        color: #fff;
+        border: 1px solid #555;
+        border-radius: 4px;
+        outline: none;
+        font-weight: 600;
+        font-size: larger;
+        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+}
+
+.modal-subheading {
     margin-bottom: 10px;
-    width: 90%;
-    background-color: #333;
-    color: #ffffff;
-    border: 1px solid #666;
-    border-radius: 5px;
+    color: rgb(175, 174, 174);
+    font-size: 16px;
     font-weight: 600;
 }
 
 input[type="text"]:focus {
     border: 1px solid #333;
     border-radius: 5px;
+    
 }
 
 input::placeholder {
@@ -201,6 +237,7 @@ input::placeholder {
     font-style: italic;
     font-weight: 600;
     font-size: large;
+    
     /* Optional: Italicize the placeholder text */
 }
 
@@ -235,7 +272,7 @@ input:focus::placeholder {
 
 
 #backupRestoreDialog {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
     border-radius: 8px;
     max-width: 300px;
     
@@ -251,7 +288,11 @@ input:focus::placeholder {
     margin: 5px;
 }
 
- 
+
+
+.createAc {
+    color: #5e5cd5;
+}
 
 
 

@@ -81,14 +81,14 @@
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
 
-                <p class="modal-subheading">Please enter your Zapit "Login key" and "Wallet link," then press login. Your information will be saved, and you will
+                <p class="modal-subheading">Please enter your Zapit "Login key" and "Wallet id," then press login. Your information will be saved, and you will
                 gain access. <br> <br>If you don't have an account, you can <a class="createAc" href="https://signup.zapit.live/" >Create New Account</a></p></p>
         
                 <label for="walletId"></label>
-                <input type="text" id="walletId" placeholder="Enter Wallet ID">
+                <input type="text" id="walletId" placeholder="Enter Login Key">
         
                 <label for="walletLink"></label>
-                <input type="text" id="walletLink" placeholder="Enter Wallet Link">
+                <input type="text" id="walletLink" placeholder="Enter Wallet Id">
         
                 <button id="saveWallet" onclick="saveWallet()">Save Wallet</button>
             </div>
@@ -101,7 +101,11 @@
                 <i data-lucide="key-round" class="menu-icon"></i>
             </button>
         </div>
-
+        <div class="home-container">
+            <button id="homeButton" onclick="openLink()">
+                <i data-lucide="arrow-left-circle" class="menu-icon"></i>
+            </button>
+        </div>
 
     <script src="wallet.js"></script>
 
