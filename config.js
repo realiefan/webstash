@@ -32,7 +32,7 @@ const CONFIG = {
     {
       id: "3",
       name: "Zap",
-      icon: "zap",
+      icon: "wallet",
       link: "/assets/pages/wallet/wallet.html",
     },
   ],
