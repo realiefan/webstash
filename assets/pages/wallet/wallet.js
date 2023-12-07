@@ -73,11 +73,21 @@ function openWallet(buttonType) {
     const walletData = JSON.parse(storedWalletData);
 
     switch (buttonType) {
+      case "boltz":
+        window.location.href = walletData.walletLink.replace("wallet", "boltz");
+        break;
+      case "tipjar":
+        window.location.href = walletData.walletLink.replace(
+          "wallet",
+          "tipjar"
+        );
+        break;
       case "connect":
         window.location.href = walletData.walletLink.replace(
           "wallet",
           "lndhub"
         );
+        break;
       case "wallet":
         window.location.href = walletData.walletLink.replace(
           "wallet",
@@ -116,6 +126,9 @@ function openWallet(buttonType) {
         break;
       case "cashu":
         window.location.href = walletData.walletLink.replace("wallet", "cashu");
+        break;
+      default:
+        
         break;
     }
   } else {
