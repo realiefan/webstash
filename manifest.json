@@ -2,6 +2,7 @@
   "name": "NostrWeb",
   "short_name": "NostrWeb",
   "description": "NostrWeb: Web portal by NostrNet",
+  "version": "1.0.0",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#202124",
@@ -18,11 +19,6 @@
       "type": "image/png"
     }
   ],
-  "scope": [
-    "/",
-    "notes.nostrnet.work",
-    "cal.nostrnet.work",
-    "nostrnet.work",
-    "voucher.nostrnet.work"
-  ]
+  "scope": "/",
+  "prefer_related_applications": true
 }
