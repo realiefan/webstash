@@ -124,21 +124,33 @@ function loadLinksFromLocalStorage() {
 
 function setDefaultLinks() {
   const defaultLinks = [
-    { url: "https://bard.google.com/", title: "Bard" },
-    { url: "https://habla.news/", title: "Habla" },
-    { url: "https://www.perplexity.ai/", title: "Perplexity" },
-    { url: "https://archive.org/", title: "Archive" },
-    { url: "https://nostr.build/", title: "Nostr.Build" },
-    { url: "https://nostr.band/", title: "Nostr.Band" },
-    { url: "https://nostrudel.ninja/", title: "noStrudel" },
-    { url: "https://satellite.earth/", title: "Satellite" },
-    { url: "https://snort.social/notes", title: "Snort" },
-    { url: "https://stacker.news/", title: "Stacker" },
-    { url: "https://www.stemstr.app/", title: "Stemstr" },
-    { url: "https://oddbean.com/", title: "Oddbean" },
-    { url: "https://zaplife.lol/", title: "Zaplife" },
-    { title: "DuckDuckGo", url: "https://start.duckduckgo.com/" },
-    { title: "Hacker News", url: "https://news.ycombinator.com/" },
+    { id: "bard-embed", url: "https://bard.google.com/", title: "Bard" },
+    { id: "habla-embed", url: "https://habla.news/", title: "Habla" },
+    {
+      id: "perplexity-embed",
+      url: "https://www.perplexity.ai/",
+      title: "Perplexity",
+    },
+    { id: "archive-embed", url: "https://archive.org/", title: "Archive" },
+    {
+      id: "nostrbuild-embed",
+      url: "https://nostr.build/",
+      title: "Nostr.Build",
+    },
+    { id: "nostrband-embed", url: "https://nostr.band/", title: "Nostr.Band" },
+    {
+      id: "nostrudel-embed",
+      url: "https://nostrudel.ninja/",
+      title: "noStrudel",
+    },
+    {
+      id: "satellite-embed",
+      url: "https://satellite.earth/",
+      title: "Satellite",
+    },
+    { id: "stacker-embed", url: "https://stacker.news/", title: "Stacker" },
+    { id: "oddbean-embed", url: "https://oddbean.com/", title: "Oddbean" },
+    { title: "Hacker News ", url: "https://news.ycombinator.com/" },
     { title: "Brave", url: "https://search.brave.com/" },
     { title: "X", url: "https://twitter.com/" },
     { title: "Reddit", url: "https://www.reddit.com/" },
@@ -146,12 +158,19 @@ function setDefaultLinks() {
     { title: "GitHub", url: "https://github.com/" },
     { title: "Memo Ai", url: "https://www.recordergo.app/" },
     { title: "Wikipedia", url: "https://wikipedia.org/" },
-    { title: "Ontolo", url: "https://www.ontolo.social/" },
     { title: "Shopstr", url: "https://shopstr.store/" },
-    { title: "UnleashedChat", url: "https://unleashed.chat/" },
+    { title: "UnleashedChat ", url: "https://unleashed.chat/" },
     { title: "ProtonMail", url: "https://mail.proton.me/" },
     { title: "NostrApps", url: "https://nostrapp.link/" },
+    {title: "Rumble", url: "https://rumble.com/",},
+    { title: "BlueSky", url: "https://bsky.app/" },
+    { title: "Coracle", url: "https://coracle.social/" },
+    { title: "CallOfWar", url: "https://www.callofwar.com/" },
+    { title: "Snort", url: "https://Snort.social" },
+    { title: "ShipYard", url: "https://shipyard.pub/" },
+    { title: "Stream", url: "https://zap.stream/" },
   ];
+;
 
   localStorage.setItem("links", JSON.stringify(defaultLinks));
   return defaultLinks;
