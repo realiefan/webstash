@@ -134,6 +134,7 @@ function setDefaultLinks() {
   {"id": "stacker-embed", "url": "https://stacker.news/", "title": "Stacker"},
   {"id": "oddbean-embed", "url": "https://oddbean.com/", "title": "Oddbean"},
   {"title": "Brave", "url": "https://search.brave.com/"},
+  {"title": "Bard", "url": "https://bard.google.com/"},
   {"title": "X", "url": "https://twitter.com/"},
   {"title": "Reddit", "url": "https://www.reddit.com/"},
   {"title": "Wormhole", "url": "https://wormhole.app/"},
