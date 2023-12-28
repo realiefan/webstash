@@ -124,36 +124,52 @@ function loadLinksFromLocalStorage() {
 
 function setDefaultLinks() {
   const defaultLinks = [
-  {"id": "habla-embed", "url": "https://habla.news/", "title": "Habla"},
-  {"id": "perplexity-embed", "url": "https://www.perplexity.ai/", "title": "Perplexity"},
-  {"id": "archive-embed", "url": "https://archive.org/", "title": "Archive"},
-  {"id": "nostrbuild-embed", "url": "https://nostr.build/", "title": "Nostr.Build"},
-  {"id": "nostrband-embed", "url": "https://nostr.band/", "title": "Nostr.Band"},
-  {"id": "nostrudel-embed", "url": "https://nostrudel.ninja/", "title": "noStrudel"},
-  {"id": "satellite-embed", "url": "https://satellite.earth/", "title": "Satellite"},
-  {"id": "stacker-embed", "url": "https://stacker.news/", "title": "Stacker"},
-  {"id": "oddbean-embed", "url": "https://oddbean.com/", "title": "Oddbean"},
-  {"title": "Brave", "url": "https://search.brave.com/"},
-  {"title": "Bard", "url": "https://bard.google.com/"},
-  {"title": "X", "url": "https://twitter.com/"},
-  {"title": "Reddit", "url": "https://www.reddit.com/"},
-  {"title": "Wormhole", "url": "https://wormhole.app/"},
-  {"title": "GitHub", "url": "https://github.com/"},
-  {"title": "Memo Ai", "url": "https://www.recordergo.app/"},
-  {"title": "Wikipedia", "url": "https://wikipedia.org/"},
-  {"title": "Shopstr", "url": "https://shopstr.store/"},
-  {"title": "UnleashedChat", "url": "https://unleashed.chat/"},
-  {"title": "ProtonMail", "url": "https://mail.proton.me/"},
-  {"title": "NostrApps", "url": "https://nostrapp.link/"},
-  {"title": "Rumble", "url": "https://rumble.com/"},
-  {"title": "BlueSky", "url": "https://bsky.app/"},
-  {"title": "Coracle", "url": "https://coracle.social/"},
-  {"title": "CallOfWar", "url": "https://www.callofwar.com/"},
-  {"title": "Snort", "url": "https://Snort.social"},
-  {"title": "ShipYard", "url": "https://shipyard.pub/"},
-  {"title": "Stream", "url": "https://zap.stream/"},
-  {"title": "Flare", "url": "https://www.flare.pub/"}
-];
+    { id: "bard-embed", url: "https://bard.google.com/", title: "Bard" },
+    { id: "habla-embed", url: "https://habla.news/", title: "Habla" },
+    {
+      id: "perplexity-embed",
+      url: "https://www.perplexity.ai/",
+      title: "Perplexity",
+    },
+    { id: "archive-embed", url: "https://archive.org/", title: "Archive" },
+    {
+      id: "nostrbuild-embed",
+      url: "https://nostr.build/",
+      title: "Nostr.Build",
+    },
+    { id: "nostrband-embed", url: "https://nostr.band/", title: "Nostr.Band" },
+    {
+      id: "nostrudel-embed",
+      url: "https://nostrudel.ninja/",
+      title: "noStrudel",
+    },
+    {
+      id: "satellite-embed",
+      url: "https://satellite.earth/",
+      title: "Satellite",
+    },
+    { id: "stacker-embed", url: "https://stacker.news/", title: "Stacker" },
+    { id: "oddbean-embed", url: "https://oddbean.com/", title: "Oddbean" },
+    { title: "Hacker News ", url: "https://news.ycombinator.com/" },
+    { title: "Brave", url: "https://search.brave.com/" },
+    { title: "X", url: "https://twitter.com/" },
+    { title: "Reddit", url: "https://www.reddit.com/" },
+    { title: "Wormhole", url: "https://wormhole.app/" },
+    { title: "GitHub", url: "https://github.com/" },
+    { title: "Memo Ai", url: "https://www.recordergo.app/" },
+    { title: "Wikipedia", url: "https://wikipedia.org/" },
+    { title: "Shopstr", url: "https://shopstr.store/" },
+    { title: "UnleashedChat ", url: "https://unleashed.chat/" },
+    { title: "ProtonMail", url: "https://mail.proton.me/" },
+    { title: "NostrApps", url: "https://nostrapp.link/" },
+    {title: "Rumble", url: "https://rumble.com/",},
+    { title: "BlueSky", url: "https://bsky.app/" },
+    { title: "Coracle", url: "https://coracle.social/" },
+    { title: "CallOfWar", url: "https://www.callofwar.com/" },
+    { title: "Snort", url: "https://Snort.social" },
+    { title: "ShipYard", url: "https://shipyard.pub/" },
+    { title: "Stream", url: "https://zap.stream/" },
+  ];
 ;
 
   localStorage.setItem("links", JSON.stringify(defaultLinks));
@@ -164,4 +180,10 @@ function sortLinksAlphabetically(links) {
   links.sort((a, b) => a.title.localeCompare(b.title));
 }
 
+
+
+const otMeta = document.createElement('meta');
+otMeta.httpEquiv = 'origin-trial';
+otMeta.content = 'AkmkfDzmgfnMr7tEFkOtxDQSEJT7cvbDE8dFCzTCXVAIKqPkXBd8MqaNgEKBS+HT3xC8JU/5DmSug42IA9nDGgcAAABreyJvcmlnaW4iOiJodHRwczovL3d3dy53ZWJjb3JlLmxpdmU6NDQzIiwiZmVhdHVyZSI6IldlYkFwcFRhYlN0cmlwIiwiZXhwaXJ5IjoxNzE2OTQwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZX0=';
+document.head.append(otMeta);
 

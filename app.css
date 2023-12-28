@@ -56,6 +56,7 @@
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
   transition: 0.2s ease-in-out;
+  
 }
 
 /* Body styles */
@@ -66,6 +67,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  
   
 }
 
@@ -118,7 +121,7 @@ body {
   margin: 1em 2em 0 0;
   right: 0;
   top: 0;
-  color: #d8dee9;
+  color: #615fcc;
   border: none;
   cursor: pointer;
   background-color: #00000000;
@@ -139,6 +142,7 @@ body {
   grid-template-rows: repeat(4, 1fr);
   grid-gap: 10px;
   padding: 10px;
+  max-width: 1080px;
   
   
 }
@@ -186,9 +190,9 @@ body {
 
 /* Search bar styles */
 .searchBar {
-  margin-top: 10px;
+  margin-top: 5px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   display: flex;
   justify-content: center;
   animation: fade-in 1s ease-in-out;
@@ -200,7 +204,7 @@ body {
 
 #googleSearch {
   padding: 5px 6px;
-  width: 95%;
+  width: 65%;
   font-size: large;
   background-color: #131314;
   box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
@@ -235,9 +239,21 @@ body {
     border-radius: 10px;
     color: #d8dee9;
     padding: 5px 10px;
-    color: #d8dee9;
     width: 95%;
     
+}
+
+#searchEngineDropdown {
+    margin: 10px;
+      font-size: large;
+      font-weight: 600;
+      background-color: #131314;
+      box-shadow: 0 5px 7px rgba(0, 0, 0, 0.35);
+      border: none;
+      border-radius: 10px;
+      color: #888c91;
+      padding: 5px 10px;
+
 }
 
 
@@ -285,7 +301,7 @@ body {
 .buttonIcon {
   width: var(--icon);
   height: var(--icon);
-  color: #d8dee9;
+  color: #6f6ec9;
 }
 
 .backup{
@@ -480,6 +496,7 @@ button {
   align-items: center;
   margin-bottom: 10px;
   margin-top: 10px;
+
   
   
   
@@ -499,8 +516,8 @@ button {
 
 .link-icon {
   background-color: #212121;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-bottom: 5px;
   cursor: pointer;
@@ -511,13 +528,13 @@ button {
 }
 
 .mainButton {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
   background-color: #131314;
-  color: #d8dee9;
+  color: #c8c9cb;
   padding: 1px 1px;
   border: none;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 9px;
   border-radius: 16px;
   font-weight: 600;
   white-space: nowrap;

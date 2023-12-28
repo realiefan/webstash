@@ -11,23 +11,23 @@ const CONFIG = {
 
   firstButtonsContainer: [
     {
-      id: "1",
-      name: "nostrsync",
-      icon: "database-backup",
+      id: "2",
+      name: "Gmail",
+      icon: "database",
       link: "https://nostrsync.live/",
     },
     {
       id: "5",
-      name: "Nostrnet",
+      name: "Notes",
       icon: "pen-square",
       link: "https://notes.nostrnet.work/",
     },
 
     {
-      id: "2",
+      id: "1",
       name: "Calendar",
       icon: "calendar-check-2",
-      link: "https://cal.nostrnet.work",
+      link: "https://cal.nostrnet.work/",
     },
     {
       id: "3",
