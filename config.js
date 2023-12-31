@@ -13,14 +13,14 @@ const CONFIG = {
     {
       id: "2",
       name: "Gmail",
-      icon: "database",
-      link: "https://nostrsync.live/",
+      icon: "database-zap",
+      link: "/assets/pages/backup/backup.html",
     },
     {
       id: "5",
-      name: "Notes",
-      icon: "pen-square",
-      link: "https://notes.nostrnet.work/",
+      name: "Wallet",
+      icon: "zap",
+      link: "/assets/pages/wallet/wallet.html",
     },
 
     {
@@ -31,9 +31,9 @@ const CONFIG = {
     },
     {
       id: "3",
-      name: "Wallet",
-      icon: "wallet",
-      link: "/assets/pages/wallet/wallet.html",
+      name: "Setting",
+      icon: "settings",
+      link: "/assets/pages/control/control.html",
     },
   ],
 };

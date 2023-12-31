@@ -5,7 +5,7 @@ body {
     align-items: center;
     justify-content: center;
     /* Center the content vertically */
-    min-height: 100vh;
+    min-height: 100%;
     background-color: #212121;
     color: #ffffff;
     font-family: 'Arial', sans-serif;
@@ -86,14 +86,14 @@ body {
         justify-content: center;
         align-items: center;
         display: flex;
-        margin-top: 30px;
+        margin: 30px;
         animation: slideUp 0.5s ease-in-out forwards;
 
 }
 .menu-icon {
     
     
-    padding: 5px 5px;
+    padding: 2px ;
     border: none;
     cursor: pointer;
   
@@ -117,6 +117,13 @@ body {
     padding: 4px;
 
 }
+.fileSync {
+        background: linear-gradient(90deg, #a77cb4, #7f7dd1);
+        font-size: 0px;
+        color: #212121;
+        padding: 4px;
+
+    }
 
 
 #toggleDeleteButton {
@@ -147,7 +154,7 @@ button {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #131314;
     color: #d6d5d5;
-    padding: 8px 8px;
+    padding: 6px 8px;
     border: none;
     cursor: pointer;
     font-size: 15px;
@@ -276,28 +283,29 @@ input:focus::placeholder {
     border-radius: 8px;
     max-width: 300px;
     
-    padding: 44px;
+    padding: 34px;
     z-index: 1000;
     text-align: center;
     
 }
 
-#downloadDataButton, #restoreDataButton, #Cancel {
+#downloadDataButton, #restoreDataButton {
     margin-bottom: 10px;
-    font-size: 25px;
+    font-size: 15px;
     margin: 5px;
+    background: linear-gradient(90deg, #5e5cd5, #226ed2 100%, #126ce1 0);
 }
 
-
+#Cancel {
+margin-top: 20px;
+    font-size: 15px;
+    margin: 5px;
+    
+}
 
 .createAc {
     color: #5e5cd5;
 }
-
-
-
-
-
 
 
 @keyframes slideUp {

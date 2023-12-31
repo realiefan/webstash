@@ -10,6 +10,7 @@
 		<link rel=" shortcut icon" type="image/png" href="/assests/icons/icon.png" />
 		<link rel="stylesheet" href="app.css" />
 		<script src="https://unpkg.com/lucide@latest"></script>
+
 		
 		
 	</head>
@@ -29,7 +30,6 @@
 				<div class="searchBar">
 					<select id="searchEngineDropdown">
 						<option value="nostr">Nostr</option>
-						<option value="brave">brave</option>
 						<option value="duckduckgo">DDG</option>
 						<option value="google">Google</option>
 						<option value="reddit">Reddit</option>
@@ -56,6 +56,8 @@
 				</div>
 				</div>
 			</div>
+
+
 			<div id="overlay"></div>
 			<div id="dialog">
 				<p>
@@ -125,7 +127,6 @@
 		<!-- Generators  -->
 		<script src="assets/js/buttons.js"></script>
 		<script src="assets/js/lists.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/custom-tabs@latest/dist/custom-tabs.min.js"></script>
 
 		
 
@@ -150,12 +151,11 @@
 					document.getElementById('dialog').style.display = 'none';
 				} else {
 					// App is not in fullscreen or standalone mode, show the dialog
-					document.getElementById('dialog').style.display = 'block';
-					document.getElementById('overlay').style.display = 'block';
+					document.getElementById('dialog').style.display = 'none';
+					document.getElementById('overlay').style.display = 'none';
 				}
 
 		</script>
-
 		<script>
 			window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 		</script>

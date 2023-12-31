@@ -121,7 +121,7 @@ body {
   margin: 1em 2em 0 0;
   right: 0;
   top: 0;
-  color: #615fcc;
+  color: #5e5cd5;
   border: none;
   cursor: pointer;
   background-color: #00000000;
@@ -301,7 +301,7 @@ body {
 .buttonIcon {
   width: var(--icon);
   height: var(--icon);
-  color: #6f6ec9;
+  color: #6c6ada;
 }
 
 .backup{

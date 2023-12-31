@@ -22,9 +22,6 @@ function performSearch() {
   } else if (searchEngine === "nostr") {
     window.location.href =
       "https://nostr.band/?q=" + encodeURIComponent(searchTerm);
-  } else if (searchEngine === "brave") {
-    window.location.href =
-      "https://search.brave.com/search?q=" + encodeURIComponent(searchTerm);
   }
   // Add more conditions for other search engines
 }

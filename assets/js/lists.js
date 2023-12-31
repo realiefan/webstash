@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Load links from localStorage or add defaults
   loadLinks();
-  
 
   // Attach event listener for toggleDeleteButtons
 });
@@ -50,8 +49,6 @@ function addLink() {
   }
 }
 
-
-
 function createLinkContainer(link) {
   const linkDiv = document.createElement("div");
   linkDiv.className = "link-container";
@@ -61,6 +58,10 @@ function createLinkContainer(link) {
   linkButton.className = "mainButton";
 
   linkButton.addEventListener("click", () => {
+    // Increment click count for the URL
+    updateLinkClickCount(link.url, link.title); // Pass title as additional information
+
+    // Redirect to the link URL
     window.location.href = link.url;
   });
 
@@ -77,7 +78,12 @@ function createLinkContainer(link) {
       // Modify the event listener for the icon
       icon.addEventListener("click", (event) => {
         event.preventDefault(); // Prevent the default behavior of following the link
-        window.location.href = link.url; // Manually set the window location to the link's URL
+
+        // Increment click count for the URL
+        updateLinkClickCount(link.url, link.title); // Pass title as additional information
+
+        // Manually set the window location to the link's URL
+        window.location.href = link.url;
       });
 
       linkDiv.insertBefore(icon, linkButton); // Insert icon before the button
@@ -89,15 +95,48 @@ function createLinkContainer(link) {
   return linkDiv;
 }
 
+function updateLinkClickCount(url, title) {
+  const linkUsageData = getLinkUsageData();
+  const linkInfo = linkUsageData[url] || {
+    count: 0,
+    title: title,
+    lastAccessTime: null,
+    performance: null,
+  };
+
+  // Increment click count for the URL
+  linkInfo.count += 1;
+
+  // Update the latest access time
+  linkInfo.lastAccessTime = new Date().toISOString();
+
+  // Remove the code related to performance measurement
+  // linkInfo.performance = null;
+
+  // Update the link usage data in local storage
+  linkUsageData[url] = linkInfo;
+  setLinkUsageData(linkUsageData);
+}
+
+
+
+// Add this function to your existing code
+function getLinkUsageData() {
+  return JSON.parse(localStorage.getItem("linkUsageData")) || {};
+}
+
+function setLinkUsageData(data) {
+  localStorage.setItem("linkUsageData", JSON.stringify(data));
+}
+
+
+
 
 function fetchIcon(url) {
   const urlWithoutProtocol = url.replace(/^https?:\/\//, ""); // Remove "https://" or "http://"
   const iconURL = `https://icon.horse/icon/${urlWithoutProtocol}`;
   return Promise.resolve(iconURL);
 }
-
-
-
 
 function loadLinks() {
   const linkContainer = document.getElementById("linksContainer");
@@ -113,9 +152,6 @@ function loadLinks() {
     const linkDiv = createLinkContainer(link);
     linkContainer.appendChild(linkDiv);
   });
-
-
-
 }
 
 function loadLinksFromLocalStorage() {
@@ -161,7 +197,7 @@ function setDefaultLinks() {
     { title: "UnleashedChat ", url: "https://unleashed.chat/" },
     { title: "ProtonMail", url: "https://mail.proton.me/" },
     { title: "NostrApps", url: "https://nostrapp.link/" },
-    {title: "Rumble", url: "https://rumble.com/",},
+    { title: "Rumble", url: "https://rumble.com/" },
     { title: "BlueSky", url: "https://bsky.app/" },
     { title: "Coracle", url: "https://coracle.social/" },
     { title: "CallOfWar", url: "https://www.callofwar.com/" },
@@ -169,8 +205,6 @@ function setDefaultLinks() {
     { title: "ShipYard", url: "https://shipyard.pub/" },
     { title: "Stream", url: "https://zap.stream/" },
   ];
-;
-
   localStorage.setItem("links", JSON.stringify(defaultLinks));
   return defaultLinks;
 }
@@ -178,11 +212,4 @@ function setDefaultLinks() {
 function sortLinksAlphabetically(links) {
   links.sort((a, b) => a.title.localeCompare(b.title));
 }
-
-
-
-const otMeta = document.createElement('meta');
-otMeta.httpEquiv = 'origin-trial';
-otMeta.content = 'AkmkfDzmgfnMr7tEFkOtxDQSEJT7cvbDE8dFCzTCXVAIKqPkXBd8MqaNgEKBS+HT3xC8JU/5DmSug42IA9nDGgcAAABreyJvcmlnaW4iOiJodHRwczovL3d3dy53ZWJjb3JlLmxpdmU6NDQzIiwiZmVhdHVyZSI6IldlYkFwcFRhYlN0cmlwIiwiZXhwaXJ5IjoxNzE2OTQwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZX0=';
-document.head.append(otMeta);
 
