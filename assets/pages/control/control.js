@@ -17,10 +17,6 @@ function closeLinkAddingDialog() {
   document.getElementById("linkAddingDialog").close();
 }
 
-const db = new Dexie("WebCore");
-db.version(1).stores({
-  links: "++id, title, url",
-});
 
 function addLink() {
   const title = document.getElementById("newLinkTitle").value;
@@ -32,42 +28,37 @@ function addLink() {
   }
 
   if (title && url) {
-    // Check for duplicate links in IndexedDB
-    db.links
-      .where("title")
-      .equals(title)
-      .or("url")
-      .equals(url)
-      .count()
-      .then((count) => {
-        if (count > 0) {
-          alert("This link already exists.");
-          return;
-        }
+    const links = JSON.parse(localStorage.getItem("links")) || [];
 
-        // Save link to IndexedDB
-        db.links.add({ title, url });
+    // Check for duplicate links
+    const isDuplicate = links.some(
+      (link) => link.title === title || link.url === url
+    );
+    if (isDuplicate) {
+      alert("This link already exists.");
+      return;
+    }
 
-        const linkContainer = document.getElementById("linksContainer");
+    links.push({ title, url });
+    localStorage.setItem("links", JSON.stringify(links));
 
-        const linkDiv = createLinkContainer({ title, url });
+    const linkContainer = document.getElementById("linksContainer");
 
-        linkContainer.appendChild(linkDiv);
+    const linkDiv = createLinkContainer({ title, url });
 
-        // Clear input fields
-        document.getElementById("newLinkTitle").value = "";
-        document.getElementById("newLinkURL").value = "";
+    linkContainer.appendChild(linkDiv);
 
-        // Close the modal
-        closeLinkAddingDialog();
-      })
-      .catch((error) => {
-        console.error("Error checking duplicate links:", error);
-      });
+    // Clear input fields
+    document.getElementById("newLinkTitle").value = "";
+    document.getElementById("newLinkURL").value = "";
+
+    // Close the modal
+    closeLinkAddingDialog();
   } else {
     alert("Please enter both link title and URL");
   }
 }
+
 
 function createLinkContainer(link) {
   const linkDiv = document.createElement("div");
