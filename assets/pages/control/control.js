@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", toggleDeleteButtons);
 });
 
+
 function openLinkAddingDialog() {
   document.getElementById("linkAddingDialog").showModal();
 }
@@ -15,6 +16,11 @@ function openLinkAddingDialog() {
 function closeLinkAddingDialog() {
   document.getElementById("linkAddingDialog").close();
 }
+
+const db = new Dexie("WebCore");
+db.version(1).stores({
+  links: "++id, title, url",
+});
 
 function addLink() {
   const title = document.getElementById("newLinkTitle").value;
@@ -26,37 +32,42 @@ function addLink() {
   }
 
   if (title && url) {
-    const links = JSON.parse(localStorage.getItem("links")) || [];
+    // Check for duplicate links in IndexedDB
+    db.links
+      .where("title")
+      .equals(title)
+      .or("url")
+      .equals(url)
+      .count()
+      .then((count) => {
+        if (count > 0) {
+          alert("This link already exists.");
+          return;
+        }
 
-    // Check for duplicate links
-    const isDuplicate = links.some(
-      (link) => link.title === title || link.url === url
-    );
-    if (isDuplicate) {
-      alert("This link already exists.");
-      return;
-    }
+        // Save link to IndexedDB
+        db.links.add({ title, url });
 
-    links.push({ title, url });
-    localStorage.setItem("links", JSON.stringify(links));
+        const linkContainer = document.getElementById("linksContainer");
 
-    const linkContainer = document.getElementById("linksContainer");
+        const linkDiv = createLinkContainer({ title, url });
 
-    const linkDiv = createLinkContainer({ title, url });
+        linkContainer.appendChild(linkDiv);
 
-    linkContainer.appendChild(linkDiv);
+        // Clear input fields
+        document.getElementById("newLinkTitle").value = "";
+        document.getElementById("newLinkURL").value = "";
 
-    // Clear input fields
-    document.getElementById("newLinkTitle").value = "";
-    document.getElementById("newLinkURL").value = "";
-
-    // Close the modal
-    closeLinkAddingDialog();
+        // Close the modal
+        closeLinkAddingDialog();
+      })
+      .catch((error) => {
+        console.error("Error checking duplicate links:", error);
+      });
   } else {
     alert("Please enter both link title and URL");
   }
 }
-
 
 function createLinkContainer(link) {
   const linkDiv = document.createElement("div");
@@ -211,3 +222,11 @@ function downloadData() {
   link.download = 'localStorageData.json';
   link.click();
 }
+
+
+function openLink() {
+  // Replace 'your-link-url' with the actual URL you want to open
+  window.location.href = "/";
+}
+
+

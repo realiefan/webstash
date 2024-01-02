@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="wallet.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Open+Sans:wght@500&display=swap">
     <title>Wallet</title>
 </head>
 
@@ -82,7 +85,8 @@
                 <span class="close" onclick="closeModal()">&times;</span>
 
                 <p class="modal-subheading">Please enter your Zapit "Login key" and "Wallet id," then press login. Your information will be saved, and you will
-                gain access. <br> <br>If you don't have an account, you can <a class="createAc" href="https://signup.zapit.live/" >Create New Account</a></p></p>
+                gain access. <br> <br>If you don't have an account, you can Create New Account <br><button id="openIframeButton">Create New Account</button></p></p>
+                
         
                 <label for="walletId"></label>
                 <input type="text" id="walletId" placeholder="Enter Login Key">
@@ -93,6 +97,27 @@
                 <button id="saveWallet" onclick="saveWallet()">Save Wallet</button>
             </div>
         </div>
+
+        <div id="transactions"></div>
+
+
+    
+    <!-- Modal overlay for the iframe -->
+    <div id="iframeModal">
+        <button id="closeButton" onclick="closeIframeModal()">
+            <!-- SVG for close button -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+        <div id="iframeContainer">
+            <iframe id="signupIframe"></iframe>
+        </div>
+    </div>
+
+        
 
         
         <!-- Login Button to Open Modal -->
