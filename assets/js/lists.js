@@ -67,26 +67,31 @@ function createLinkContainer(link) {
 
   linkDiv.appendChild(linkButton);
 
-  // Fetch icon and append it to the link container
+  // Fetch icon asynchronously and append it to the link container
   fetchIcon(link.url)
     .then((iconURL) => {
-      const icon = document.createElement("img");
-      icon.src = iconURL;
-      icon.alt = `${link.title} Icon`;
-      icon.className = "link-icon";
+      return new Promise((resolve) => {
+        const icon = document.createElement("img");
+        icon.src = iconURL;
+        icon.alt = `${link.title} Icon`;
+        icon.className = "link-icon";
 
-      // Modify the event listener for the icon
-      icon.addEventListener("click", (event) => {
-        event.preventDefault(); // Prevent the default behavior of following the link
+        // Modify the event listener for the icon
+        icon.addEventListener("click", (event) => {
+          event.preventDefault(); // Prevent the default behavior of following the link
 
-        // Increment click count for the URL
-        updateLinkClickCount(link.url, link.title); // Pass title as additional information
+          // Increment click count for the URL
+          updateLinkClickCount(link.url, link.title); // Pass title as additional information
 
-        // Open the link URL in a new window
-        window.open(link.url, "_self");
+          // Open the link URL in a new window
+          window.open(link.url, "_self");
+        });
+
+        // Append icon to the link container
+        linkDiv.insertBefore(icon, linkButton); // Insert icon before the button
+
+        resolve(); // Resolve the promise once the icon is appended
       });
-
-      linkDiv.insertBefore(icon, linkButton); // Insert icon before the button
     })
     .catch((error) => {
       console.error("Error fetching icon:", error);
@@ -94,6 +99,13 @@ function createLinkContainer(link) {
 
   return linkDiv;
 }
+
+function fetchIcon(url) {
+  const urlWithoutProtocol = url.replace(/^https?:\/\//, ""); // Remove "https://" or "http://"
+  const iconURL = `https://icon.horse/icon/${urlWithoutProtocol}`;
+  return Promise.resolve(iconURL);
+}
+
 
 function updateLinkClickCount(url, title) {
   const linkUsageData = getLinkUsageData();
@@ -129,11 +141,7 @@ function setLinkUsageData(data) {
 
 
 
-function fetchIcon(url) {
-  const urlWithoutProtocol = url.replace(/^https?:\/\//, ""); // Remove "https://" or "http://"
-  const iconURL = `https://icon.horse/icon/${urlWithoutProtocol}`;
-  return Promise.resolve(iconURL);
-}
+
 
 function loadLinks() {
   const linkContainer = document.getElementById("linksContainer");
@@ -157,51 +165,40 @@ function loadLinksFromLocalStorage() {
 
 function setDefaultLinks() {
   const defaultLinks = [
-    { id: "bard-embed", url: "https://bard.google.com/", title: "Bard" },
-    { id: "habla-embed", url: "https://habla.news/", title: "Habla" },
-    {
-      id: "perplexity-embed",
-      url: "https://www.perplexity.ai/",
-      title: "Perplexity",
-    },
-    { id: "archive-embed", url: "https://archive.org/", title: "Archive" },
-    {
-      id: "nostrbuild-embed",
-      url: "https://nostr.build/",
-      title: "Nostr.Build",
-    },
-    { id: "nostrband-embed", url: "https://nostr.band/", title: "Nostr.Band" },
-    {
-      id: "nostrudel-embed",
-      url: "https://nostrudel.ninja/",
-      title: "noStrudel",
-    },
-    {
-      id: "satellite-embed",
-      url: "https://satellite.earth/",
-      title: "Satellite",
-    },
-    { id: "stacker-embed", url: "https://stacker.news/", title: "Stacker" },
-    { id: "oddbean-embed", url: "https://oddbean.com/", title: "Oddbean" },
-    { title: "Brave", url: "https://search.brave.com/" },
-    { title: "X", url: "https://twitter.com/" },
-    { title: "Reddit", url: "https://www.reddit.com/" },
-    { title: "Wormhole", url: "https://wormhole.app/" },
-    { title: "GitHub", url: "https://github.com/" },
-    { title: "Memo Ai", url: "https://www.recordergo.app/" },
-    { title: "Wikipedia", url: "https://wikipedia.org/" },
-    { title: "Shopstr", url: "https://shopstr.store/" },
-    { title: "UnleashedChat ", url: "https://unleashed.chat/" },
-    { title: "ProtonMail", url: "https://mail.proton.me/" },
-    { title: "NostrApps", url: "https://nostrapp.link/" },
-    { title: "Rumble", url: "https://rumble.com/" },
-    { title: "BlueSky", url: "https://bsky.app/" },
-    { title: "Coracle", url: "https://coracle.social/" },
-    { title: "CallOfWar", url: "https://www.callofwar.com/" },
-    { title: "Snort", url: "https://Snort.social" },
-    { title: "ShipYard", url: "https://shipyard.pub/" },
-    { title: "Stream", url: "https://zap.stream/" },
-  ];
+  {"id":"habla-embed","url":"https://habla.news/","title":"Habla"},
+  {"id":"perplexity-embed","url":"https://www.perplexity.ai/","title":"Perplexity"},
+  {"id":"archive-embed","url":"https://archive.org/","title":"Archive"},
+  {"id":"nostrbuild-embed","url":"https://nostr.build/","title":"Nostr.Build"},
+  {"id":"nostrband-embed","url":"https://nostr.band/","title":"Nostr.Band"},
+  {"id":"nostrudel-embed","url":"https://nostrudel.ninja/","title":"noStrudel"},
+  {"id":"satellite-embed","url":"https://satellite.earth/","title":"Satellite"},
+  {"id":"stacker-embed","url":"https://stacker.news/","title":"Stacker"},
+  {"id":"oddbean-embed","url":"https://oddbean.com/","title":"Oddbean"},
+  {"title":"Reddit","url":"https://www.reddit.com/"},
+  {"title":"Wormhole","url":"https://wormhole.app/"},
+  {"title":"GitHub","url":"https://github.com/"},
+  {"title":"Memo Ai","url":"https://www.recordergo.app/"},
+  {"title":"Wikipedia","url":"https://wikipedia.org/"},
+  {"title":"Shopstr","url":"https://shopstr.store/"},
+  {"title":"ProtonMail","url":"https://mail.proton.me/"},
+  {"title":"Rumble","url":"https://rumble.com/"},
+  {"title":"BlueSky","url":"https://bsky.app/"},
+  {"title":"Coracle","url":"https://coracle.social/"},
+  {"title":"CallOfWar","url":"https://www.callofwar.com/"},
+  {"title":"Snort","url":"https://Snort.social"},
+  {"title":"ShipYard","url":"https://shipyard.pub/"},
+  {"title":"Stream","url":"https://zap.stream/"},
+  {"title":"Flare","url":"https://www.flare.pub/"},
+  {"title":"Primal","url":"https://primal.net/home"},
+  {"title":"Unleashed","url":"https://unleashed.chat/"},
+  {"title":"Poa.st","url":"https://poa.st/"},
+  {"title":"X","url":"https://twitter.com/home"},
+  {"title":"Sendstr","url":"https://sendstr.com"},
+  {"title":"Pinstr","url":"https://pinstr.app/"},
+  {"title":"Highlighter","url":"https://highlighter.com/"},
+  {"title":"Nostr Nests","url":"https://nostrnests.com/"},
+  {"title":"wavlake","url":"https://www.wavlake.com/"}
+];
   localStorage.setItem("links", JSON.stringify(defaultLinks));
   return defaultLinks;
 }

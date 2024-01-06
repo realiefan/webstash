@@ -1,4 +1,4 @@
-@import url('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">');
+
 
 :root {
   /* Font Size */
@@ -75,34 +75,23 @@ body {
 }
 
 .logoText {
-  font-family: Google Sans, Helvetica Neue, sans-serif;
-  position: absolute;
-  margin: 5%;
-  margin-top: 0.7em;
+
+  cursor: pointer;
   left: 0;
   top: 0;
   /* Apply the linear gradient to the text content of the logo */
-  background: linear-gradient(90deg, #7f7dd1, #548dd9 100%, #548dd9 0);
-  -webkit-background-clip: text;
-  color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 25px;
-  font-weight: 600;
-  animation: fade-in 1s ease-in-out;
+    
+  position: absolute;
+  padding: 15px;
+  margin-top: 5px;
+
+  
+  
+ 
 
 }
 
-.logoText a {
-  /* Reset the background-clip for the <a> element */
-  background-clip: initial;
-  /* Set the color to the desired color for the text */
 
-  /* Adjust the color to your preference */
-  text-decoration: none;
-
-  /* Optional: Remove the default underline for links */
-}
 
 
 
@@ -190,7 +179,7 @@ body {
 
 /* Search bar styles */
 .searchBar {
-  margin-top: 5px;
+  margin-top: 3px;
   text-align: center;
   margin-bottom: 0px;
   display: flex;

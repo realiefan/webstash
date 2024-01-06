@@ -3,30 +3,28 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>WebCore</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=0.9">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<link rel="manifest" href="/manifest.json" />
 		<link rel="assetlinks.json" href="/.well-known/assetlinks.json" />
 		<link rel=" shortcut icon" type="image/png" href="/assests/icons/icon.png" />
 		<link rel="stylesheet" href="app.css" />
-		<script src="https://unpkg.com/lucide@latest"></script>
-
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		
 		<link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Open+Sans:wght@500&display=swap"
 			rel="stylesheet">
-		
-		
+
 	</head>
 
 	<body class="">
 		<div class="container">
 			
 			<button id="themeButton">
-				<i id="themeIcon" icon-name="bot"></i>
+				<i id="themeIcon" data-lucide="bot"></i>
 			</button>
 			<div class="logoText">
-				<a>WebCore</a>
+        <a href="#">
+            <img src="/assets/icons/logo.png" alt="WebCore Logo" width="40" height="auto">
+        </a>
 			</div>
 			<div class="timeBlock">
 				<div class="heading">
@@ -131,8 +129,9 @@
 		<!-- Generators  -->
 		<script src="assets/js/buttons.js"></script>
 		<script src="assets/js/lists.js"></script>
-		<script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+		<script src="https://unpkg.com/lucide@latest"></script>
 
+		
 		
 
 		<!-- Icons -->
@@ -142,8 +141,10 @@
 
 		<script>
 			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('/assets/js/sw.js')
-			}
+					window.addEventListener('load', () => {
+						navigator.serviceWorker.register('/sw.js');
+					});
+				}
 		</script>
 
 		<script>
@@ -156,9 +157,12 @@
 					document.getElementById('dialog').style.display = 'none';
 				} else {
 					// App is not in fullscreen or standalone mode, show the dialog
-					document.getElementById('dialog').style.display = 'block';
-					document.getElementById('overlay').style.display = 'block';
+					document.getElementById('dialog').style.display = 'none';
+					document.getElementById('overlay').style.display = 'none';
 				}
+
+
+				
 
 		</script>
 		
