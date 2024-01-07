@@ -3,7 +3,7 @@ importScripts(
   );
   
   const CACHE_PREFIX = "NostrNet";
-  const CACHE_VERSION = "V9.1";
+  const CACHE_VERSION = "V9.2";
   const CACHE_NAME_STATIC = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
   const CACHE_NAME_EXTERNAL_LIBRARIES = `${CACHE_PREFIX}-external-libraries-${CACHE_VERSION}`;
   const CACHE_NAME_API_RESPONSES = `${CACHE_PREFIX}-api-responses-${CACHE_VERSION}`;
