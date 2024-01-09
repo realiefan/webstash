@@ -193,7 +193,7 @@ function setDefaultLinks() {
   {"title":"Sendstr","url":"https://sendstr.com"},
   {"title":"Pinstr","url":"https://pinstr.app/"},
   {"title":"Highlighter","url":"https://highlighter.com/"},
-  {"title":"Nostr Nests","url":"https://nostrnests.com/"},
+  {"title":"NostrNests","url":"https://nostrnests.com/"},
   {"title":"wavlake","url":"https://www.wavlake.com/"}
 ];
   localStorage.setItem("links", JSON.stringify(defaultLinks));
