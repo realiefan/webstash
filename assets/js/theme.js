@@ -1,6 +1,6 @@
 document.getElementById("themeButton").addEventListener("click", function () {
   // Replace "your-link-here" with the actual link you want to open
-  var iframeLink = "https://ai.webcore.live/";
+  var iframeLink = "https://ai.iefan.tech/";
 
   // Create an iframe element
   var iframe = document.createElement("iframe");
