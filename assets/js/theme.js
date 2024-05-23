@@ -12,6 +12,9 @@ document.getElementById("themeButton").addEventListener("click", function () {
   iframe.style.width = "100%";
   iframe.style.height = "100%";
 
+  // Set the iframe to allow microphone and speech access
+  iframe.allow = "microphone; speech;";
+
   // Append the iframe to the body
   document.body.appendChild(iframe);
 });
