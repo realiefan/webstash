@@ -51,6 +51,40 @@
   </div>
 </div>
 
+<!-- Key Generation Modal -->
+<div id="keyModal" class="fixed hidden inset-0 flex items-center justify-center z-50">
+  <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+  <div class="modal-container bg-gray-800 w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+    <div class="modal-content py-4 text-left px-6">
+      <div class="flex justify-end">
+        <button id="closeKeyModalBtn" class="text-gray-400 hover:text-gray-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <h2 class="text-xl font-bold text-center mb-4">Generated RSA Keys</h2>
+
+      <div class="mb-4">
+        <label for="modalPublicKey" class="block text-sm font-medium text-gray-400 mb-2">Public Key:</label>
+        <textarea id="modalPublicKey" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y"></textarea>
+        <button onclick="copyText('modalPublicKey')" class="bg-green-500 hover:bg-green-600 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Public Key</button>
+      </div>
+
+      <div class="mb-4">
+        <label for="modalPrivateKey" class="block text-sm font-medium text-gray-400 mb-2">Private Key:</label>
+        <textarea id="modalPrivateKey" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y"></textarea>
+        <button onclick="copyText('modalPrivateKey')" class="bg-green-500 hover:bg-green-600 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Private Key</button>
+      </div>
+
+      <p class="text-sm text-gray-400 italic text-center">
+        Important: Keep your private key secure! Do not share it with anyone.
+      </p>
+    </div>
+  </div>
+</div>
+
 <script>
   // Get DOM Elements
   const messageInput = document.getElementById('messageInput');
@@ -65,11 +99,18 @@
   const outputTextarea = document.getElementById('output');
   const outputSection = document.getElementById('outputSection');
 
+  // Modal Elements
+  const keyModal = document.getElementById('keyModal');
+  const closeKeyModalBtn = document.getElementById('closeKeyModalBtn');
+  const modalPublicKey = document.getElementById('modalPublicKey');
+  const modalPrivateKey = document.getElementById('modalPrivateKey');
+
   // Event Listeners
   encryptionTypeSelect.addEventListener('change', toggleEncryptionType);
   operationTypeSelect.addEventListener('change', toggleOperationType);
   generateRsaKeysBtn.addEventListener('click', generateAndDisplayKeys);
   processBtn.addEventListener('click', handleProcessing);
+  closeKeyModalBtn.addEventListener('click', () => keyModal.classList.add('hidden'));
 
   // Function to toggle between AES and RSA sections
   function toggleEncryptionType() {
@@ -110,8 +151,12 @@
       const publicKeyJwk = await window.crypto.subtle.exportKey('jwk', keyPair.publicKey);
       const privateKeyJwk = await window.crypto.subtle.exportKey('jwk', keyPair.privateKey);
 
-      rsaKeyInput.value = JSON.stringify(publicKeyJwk, null, 2); // Display public key by default
-      alert("Private Key:\n" + JSON.stringify(privateKeyJwk, null, 2)); // Alert private key for security
+      // Display keys in the modal
+      modalPublicKey.value = JSON.stringify(publicKeyJwk, null, 2);
+      modalPrivateKey.value = JSON.stringify(privateKeyJwk, null, 2);
+
+      // Show the modal
+      keyModal.classList.remove('hidden');
     } catch (err) {
       console.error('Error generating RSA keys:', err);
       alert('An error occurred while generating keys.');
