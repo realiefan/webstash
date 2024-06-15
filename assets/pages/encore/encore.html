@@ -38,7 +38,7 @@
     <!-- RSA Section -->
     <div id="rsaSection" class="mb-4 hidden">
       <textarea id="rsaKeyInput" class="w-full p-2 bg-gray-700 text-gray-300 rounded-md mb-2" placeholder="Enter RSA key..." rows="3"></textarea>
-      <button id="generateRsaKeysBtn" class="bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold py-2 px-4 rounded-md mb-2">Generate Keys</button>
+      <button id="generateRsaKeysBtn" class="bg-gray-700 hover:bg-blue-600 text-xs text-white font-bold py-1 px-2 rounded-md mb-2">Generate Keys</button>
     </div>
 
     <button id="processBtn" class="bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold py-2 px-4 rounded-md mb-2 w-full">Process</button>
@@ -46,7 +46,7 @@
     <!-- Output Section (Hidden by default) -->
     <div id="outputSection" class="hidden">
       <textarea id="output" class="w-full p-2 bg-gray-700 text-gray-300 rounded-md" placeholder="Output..." rows="4" readonly></textarea>
-      <button onclick="copyText('output')" class="bg-green-500 hover:bg-green-600 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Output</button>
+      <button onclick="copyText('output')" class="bg-green-500 hover:bg-gray-700 text-xs text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Output</button>
     </div>
   </div>
 </div>
@@ -69,13 +69,13 @@
       <div class="mb-4">
         <label for="modalPublicKey" class="block text-sm font-medium text-gray-400 mb-2">Public Key:</label>
         <textarea id="modalPublicKey" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y"></textarea>
-        <button onclick="copyText('modalPublicKey')" class="bg-green-500 hover:bg-green-600 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Public Key</button>
+        <button onclick="copyText('modalPublicKey')" class="bg-gray-700 hover:bg-gray-700 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Public Key</button>
       </div>
 
       <div class="mb-4">
         <label for="modalPrivateKey" class="block text-sm font-medium text-gray-400 mb-2">Private Key:</label>
         <textarea id="modalPrivateKey" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y"></textarea>
-        <button onclick="copyText('modalPrivateKey')" class="bg-green-500 hover:bg-green-600 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Private Key</button>
+        <button onclick="copyText('modalPrivateKey')" class="bg-gray-700 hover:bg-gray-700 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Private Key</button>
       </div>
 
       <p class="text-sm text-gray-400 italic text-center">
