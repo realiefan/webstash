@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secure Text Encryption</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="bg-gray-900 text-gray-300 font-mono">
+
+<div class="container mx-auto p-8">
+  <h1 class="text-3xl font-bold text-center mb-8 text-blue-500">Secure Text Encrypt</h1>
+
+  <button id="openKeyModalBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md mb-6">
+    Generate Key Pair
+  </button>
+
+  <div class="bg-gray-800 rounded-lg shadow-md p-6">
+    <nav class="flex space-x-4 mb-6">
+      <button id="encryptTabBtn" class="px-4 py-2 rounded-t-lg bg-gray-700" onclick="switchTab('encrypt')">Encrypt</button>
+      <button id="decryptTabBtn" class="px-4 py-2 rounded-t-lg bg-gray-800" onclick="switchTab('decrypt')">Decrypt</button>
+    </nav>
+
+    <div id="encryptTab" class="space-y-4">
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-400">Message:</label>
+        <textarea id="message" class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y" placeholder="Enter your message here"></textarea>
+      </div>
+      <div>
+        <label for="publicKey" class="block text-sm font-medium text-gray-400">Recipient's Public Key:</label>
+        <textarea id="publicKey" class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y" placeholder="Paste recipient's public key here"></textarea>
+      </div>
+      <button onclick="encryptText()" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md">
+        Encrypt Text
+      </button>
+      <div id="encryptResult" class="mt-4 hidden">
+        <label class="block text-sm font-medium text-gray-400">Encrypted Text:</label>
+        <textarea id="encryptedText" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-32 resize-y"></textarea>
+      </div>
+    </div>
+
+    <div id="decryptTab" class="space-y-4 hidden">
+      <div>
+        <label for="encryptedTextInput" class="block text-sm font-medium text-gray-400">Encrypted Text:</label>
+        <textarea id="encryptedTextInput" class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y" placeholder="Paste the encrypted text here"></textarea>
+      </div>
+      <div>
+        <label for="privateKey" class="block text-sm font-medium text-gray-400">Your Private Key:</label>
+        <textarea id="privateKey" class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y" placeholder="Paste your private key here"></textarea>
+      </div>
+      <button onclick="decryptText()" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md">
+        Decrypt Text
+      </button>
+      <div id="decryptResult" class="mt-4 hidden">
+        <label class="block text-sm font-medium text-gray-400">Decrypted Text:</label>
+        <textarea id="decryptedText" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-32 resize-y"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Generation Modal -->
+  <div id="keyModal" class="fixed hidden inset-0 flex items-center justify-center z-50">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+    <div class="modal-container bg-gray-800 w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+      <div class="modal-content py-4 text-left px-6">
+        <div class="flex justify-end">
+          <button id="closeKeyModalBtn" class="text-gray-400 hover:text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <h2 class="text-xl font-bold text-center mb-4">Generated Key Pair</h2>
+
+        <div class="mb-4">
+          <label for="modalPublicKey" class="block text-sm font-medium text-gray-400 mb-2">Public Key:</label>
+          <div class="flex">
+            <textarea id="modalPublicKey" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y focus:outline-none focus:shadow-outline"></textarea>
+            <button class="ml-2 px-3 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-md focus:outline-none focus:shadow-outline"
+                    onclick="copyKey('modalPublicKey')">
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="modalPrivateKey" class="block text-sm font-medium text-gray-400 mb-2">Private Key:</label>
+          <div class="flex">
+            <textarea id="modalPrivateKey" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y focus:outline-none focus:shadow-outline"></textarea>
+            <button class="ml-2 px-3 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-md focus:outline-none focus:shadow-outline"
+                    onclick="copyKey('modalPrivateKey')">
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-400 italic text-center">
+          Important: Keep your private key secure! Do not share it with anyone.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Tab Switching Logic
+  const encryptTabBtn = document.getElementById('encryptTabBtn');
+  const decryptTabBtn = document.getElementById('decryptTabBtn');
+  const encryptTab = document.getElementById('encryptTab');
+  const decryptTab = document.getElementById('decryptTab');
+
+  function switchTab(tabName) {
+    if (tabName === 'encrypt') {
+      encryptTabBtn.classList.add('bg-gray-700');
+      encryptTabBtn.classList.remove('bg-gray-800');
+      decryptTabBtn.classList.add('bg-gray-800');
+      decryptTabBtn.classList.remove('bg-gray-700');
+      encryptTab.classList.remove('hidden');
+      decryptTab.classList.add('hidden');
+    } else {
+      decryptTabBtn.classList.add('bg-gray-700');
+      decryptTabBtn.classList.remove('bg-gray-800');
+      encryptTabBtn.classList.add('bg-gray-800');
+      encryptTabBtn.classList.remove('bg-gray-700');
+      decryptTab.classList.remove('hidden');
+      encryptTab.classList.add('hidden');
+    }
+  }
+
+  // Key Generation Modal Logic
+  const openKeyModalBtn = document.getElementById('openKeyModalBtn');
+  const closeKeyModalBtn = document.getElementById('closeKeyModalBtn');
+  const keyModal = document.getElementById('keyModal');
+
+  openKeyModalBtn.addEventListener('click', () => {
+    keyModal.classList.remove('hidden');
+    generateAndDisplayKeys();
+  });
+
+  closeKeyModalBtn.addEventListener('click', () => {
+    keyModal.classList.add('hidden');
+  });
+
+  // Key Generation (No Short Codes - Full Keys Only)
+  async function generateAndDisplayKeys() {
+    const keyPair = await window.crypto.subtle.generateKey(
+      {
+        name: 'RSA-OAEP',
+        modulusLength: 2048,
+        publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+        hash: 'SHA-256',
+      },
+      true,
+      ['encrypt', 'decrypt']
+    );
+
+    const publicKeyJwk = await window.crypto.subtle.exportKey('jwk', keyPair.publicKey);
+    const privateKeyJwk = await window.crypto.subtle.exportKey('jwk', keyPair.privateKey);
+
+    document.getElementById('modalPublicKey').value = JSON.stringify(publicKeyJwk, null, 2); // Display full key
+    document.getElementById('modalPrivateKey').value = JSON.stringify(privateKeyJwk, null, 2); // Display full key
+  }
+
+  // Encryption Function
+  async function encryptText() {
+    const messageInput = document.getElementById('message');
+    const publicKeyInput = document.getElementById('publicKey').value;
+    const encryptedDataOutput = document.getElementById('encryptedText');
+    const encryptResult = document.getElementById('encryptResult');
+
+    if (!messageInput.value) {
+      alert('Please enter a message to encrypt.');
+      return;
+    }
+
+    if (!publicKeyInput) {
+      alert('Please enter the recipient\'s public key.');
+      return;
+    }
+
+    try {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(messageInput.value);
+      const publicKeyJwk = JSON.parse(publicKeyInput); 
+      const importedPublicKey = await window.crypto.subtle.importKey(
+        'jwk',
+        publicKeyJwk,
+        { name: 'RSA-OAEP', hash: 'SHA-256' },
+        false,
+        ['encrypt']
+      );
+
+      const encryptedData = await window.crypto.subtle.encrypt(
+        { name: 'RSA-OAEP' },
+        importedPublicKey,
+        data
+      );
+
+      const encryptedText = arrayBufferToBase64(encryptedData);
+      encryptedDataOutput.value = encryptedText;
+      encryptResult.classList.remove('hidden');
+
+    } catch (err) {
+      console.error('Encryption error:', err);
+      alert('An error occurred during encryption. Please check the public key and try again.');
+    }
+  }
+
+  // Decryption Function
+  async function decryptText() {
+    const encryptedTextInput = document.getElementById('encryptedTextInput');
+    const privateKeyInput = document.getElementById('privateKey').value;
+    const decryptedTextOutput = document.getElementById('decryptedText');
+    const decryptResult = document.getElementById('decryptResult');
+
+    if (!encryptedTextInput.value) {
+      alert('Please enter the encrypted text.');
+      return;
+    }
+
+    if (!privateKeyInput) {
+      alert('Please enter your private key.');
+      return;
+    }
+
+    try {
+      const encryptedData = base64ToArrayBuffer(encryptedTextInput.value);
+      const privateKeyJwk = JSON.parse(privateKeyInput); 
+      const importedPrivateKey = await window.crypto.subtle.importKey(
+        'jwk',
+        privateKeyJwk,
+        { name: 'RSA-OAEP', hash: 'SHA-256' },
+        false,
+        ['decrypt']
+      );
+
+      const decryptedData = await window.crypto.subtle.decrypt(
+        { name: 'RSA-OAEP' },
+        importedPrivateKey,
+        encryptedData
+      );
+
+      const decoder = new TextDecoder();
+      const decryptedText = decoder.decode(decryptedData);
+      decryptedTextOutput.value = decryptedText;
+      decryptResult.classList.remove('hidden');
+
+    } catch (err) {
+      console.error('Decryption error:', err);
+      alert('An error occurred during decryption. This is likely due to an incorrect private key.');
+    }
+  }
+
+  // Utility Functions
+  function arrayBufferToBase64(buffer) {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    bytes.forEach(byte => binary += String.fromCharCode(byte));
+    return window.btoa(binary);
+  }
+
+  function base64ToArrayBuffer(base64) {
+    const binaryString = window.atob(base64);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes.buffer;
+  }
+
+  // Copy Key Function
+  function copyKey(elementId) {
+    const keyText = document.getElementById(elementId).value;
+    navigator.clipboard.writeText(keyText)
+      .then(() => {
+        alert('Key copied to clipboard!');
+      })
+      .catch(err => {
+        console.error('Failed to copy key: ', err);
+      });
+  }
+</script>
+
+</body>
+</html>

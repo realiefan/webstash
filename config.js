@@ -26,8 +26,8 @@ const CONFIG = {
     {
       id: "1",
       name: "Calendar",
-      icon: "calendar-check-2",
-      link: "https://cal.nostrnet.work/",
+      icon: "folder-key",
+      link: "/assets/pages/encore/encore.html",
     },
     {
       id: "3",
