@@ -1,325 +1,376 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Mini Encryption App</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <title class="flex flex-col justify-start">Encryption Core</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
-<body class="bg-gray-900 text-gray-300 font-mono">
+<style>
+    .logo {
+     text-align: left;
 
-<div class="container mx-auto p-4 h-screen flex items-center justify-center">
-  <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-    <h1 class="text-xl font-bold text-center mb-4 text-blue-500">Encryption App</h1>
+            font-size: 24px;
+             background: linear-gradient(90deg, #7f7dd1, #548dd9 100%, #548dd9 0);
+            -webkit-background-clip: text;
+            color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 25px;
+            font-weight: 600;
+            animation: slideDown 0.5s ease-in-out forwards;
+}
+.lucide-icon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+</style>
 
-    <textarea id="messageInput" class="w-full p-2 bg-gray-700 text-gray-300 rounded-md mb-2" placeholder="Enter message..." rows="4"></textarea>
+<body class="bg-[#242424]   text-gray-300 font-mono">
 
-    <div class="flex items-center space-x-2 mb-2">
-      <label for="encryptionType" class="text-sm font-medium">Type:</label>
-      <select id="encryptionType" class="bg-gray-700 text-gray-300 rounded-md px-2 py-1">
-        <option value="aes">AES</option>
-        <option value="rsa">RSA</option>
-      </select>
+    <div class="container mx-auto  flex flex-col items-center justify-start">
+        <div class=" p-4 rounded-lg  w-full max-w-full">
+            
+            <h1 class="text-xl font-bold  mb-4 logo text-blue-500 flex "><i data-lucide="lock-keyhole"  class="lucide-icon font-medium "> </i> <span class="px-1 ">Encrypt/Decrypt</span></h1>
+
+            <textarea id="messageInput" class="w-full p-2 bg-[#1a1a1a] shadow-xl text-gray-300 rounded-md mb-2"
+                placeholder="Enter message..." rows="4"></textarea>
+
+            <div class="flex items-center space-x-2 mb-2">
+                <label for="encryptionType" class="text-sm font-medium">Type:</label>
+            <select id="encryptionType" class="bg-[#1a1a1a] shadow-xl text-gray-300 rounded-md px-2 py-1">
+                <option value="aes">AES-256 (Password)</option>
+                <option value="rsa">RSA-2048 (Key Pair)</option>
+            </select>
+
+            </div>
+
+            <div class="flex items-center space-x-2 mb-2">
+                <label for="operationType" class="text-sm font-medium">Operation:</label>
+                <select id="operationType" class="bg-[#1a1a1a] shadow-xl text-gray-300 rounded-md px-2 py-1">
+                    <option value="encrypt">Encrypt</option>
+                    <option value="decrypt">Decrypt</option>
+                </select>
+            </div>
+
+            <!-- AES Section -->
+            <div id="aesSection" class="mb-4">
+                <input type="password" id="aesKey" class="w-full p-2 bg-[#1a1a1a] shadow-xl text-gray-300 rounded-md mb-2"
+                    placeholder="Enter AES passphrase...">
+            </div>
+
+            <!-- RSA Section -->
+            <div id="rsaSection" class="mb-4 hidden">
+                <textarea id="rsaKeyInput" class="w-full p-2 bg-[#1a1a1a] shadow-xl text-gray-300 rounded-md mb-2"
+                    placeholder="Enter recipient's public key..." rows="3"></textarea>
+                <button id="generateRsaKeysBtn"
+                    class="bg-[#1a1a1a] shadow-xl hover:bg-blue-600 text-xs text-white font-bold py-1 px-2 rounded-md mb-2">Generate
+                    Keys</button>
+            </div>
+
+            <button id="processBtn"
+                class="bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold py-2 px-4 rounded-md mb-2 w-full">Process</button>
+
+            <!-- Output Section (Hidden by default) -->
+            <div id="outputSection" class="hidden">
+                <textarea id="output" class="w-full p-2 bg-[#1a1a1a] shadow-xl text-gray-300 rounded-md" placeholder="Output..."
+                    rows="4" readonly></textarea>
+                <button onclick="copyText('output')"
+                    class="bg-[#1a1a1a] hover:bg-[#4a4949] shadow-xl text-xs text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy
+                    Output</button>
+            </div>
+        </div>
     </div>
 
-    <div class="flex items-center space-x-2 mb-2">
-      <label for="operationType" class="text-sm font-medium">Operation:</label>
-      <select id="operationType" class="bg-gray-700 text-gray-300 rounded-md px-2 py-1">
-        <option value="encrypt">Encrypt</option>
-        <option value="decrypt">Decrypt</option>
-      </select>
+    <!-- Key Generation Modal -->
+    <div id="keyModal" class="fixed hidden inset-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-[#242424] opacity-50"></div>
+        <div class="modal-container shadow-xl bg-[#242424] w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <div class="flex justify-end">
+                    <button id="closeKeyModalBtn" class="text-gray-400 hover:text-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <h2 class="text-xl font-bold text-center mb-4">Generated RSA Keys</h2>
+
+                <div class="mb-4">
+                    <label for="modalPublicKey" class="block text-sm font-medium text-gray-400 mb-2">Public Key:</label>
+                    <textarea id="modalPublicKey" readonly
+                        class="text-gray-300 bg-[#1a1a1a] shadow-xl rounded-md px-3 py-2 w-full h-24 resize-y"></textarea>
+                    <button onclick="copyText('modalPublicKey')"
+                        class="bg-[#1a1a1a] hover:bg-[#1a1a1a] shadow-xl text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy
+                        Public Key</button>
+                </div>
+
+                <div class="mb-4">
+                    <label for="modalPrivateKey" class="block text-sm font-medium text-gray-400 mb-2">Private
+                        Key:</label>
+                    <textarea id="modalPrivateKey" readonly
+                        class="text-gray-300 bg-[#1a1a1a] shadow-xl rounded-md px-3 py-2 w-full h-24 resize-y"></textarea>
+                    <button onclick="copyText('modalPrivateKey')"
+                        class="bg-[#1a1a1a] hover:bg-[#1a1a1a] shadow-xl text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy
+                        Private Key</button>
+                </div>
+
+                <p class="text-sm text-gray-400 italic text-center">
+                    Important: Keep your private key secure! Do not share it with anyone.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- AES Section -->
-    <div id="aesSection" class="mb-4">
-      <input type="password" id="aesKey" class="w-full p-2 bg-gray-700 text-gray-300 rounded-md mb-2" placeholder="Enter AES passphrase...">
-    </div>
+    <script>
+        // Get DOM Elements
+        const messageInput = document.getElementById('messageInput');
+        const encryptionTypeSelect = document.getElementById('encryptionType');
+        const operationTypeSelect = document.getElementById('operationType');
+        const aesSection = document.getElementById('aesSection');
+        const rsaSection = document.getElementById('rsaSection');
+        const aesKeyInput = document.getElementById('aesKey');
+        const rsaKeyInput = document.getElementById('rsaKeyInput');
+        const generateRsaKeysBtn = document.getElementById('generateRsaKeysBtn');
+        const processBtn = document.getElementById('processBtn');
+        const outputTextarea = document.getElementById('output');
+        const outputSection = document.getElementById('outputSection');
 
-    <!-- RSA Section -->
-    <div id="rsaSection" class="mb-4 hidden">
-      <textarea id="rsaKeyInput" class="w-full p-2 bg-gray-700 text-gray-300 rounded-md mb-2" placeholder="Enter RSA key..." rows="3"></textarea>
-      <button id="generateRsaKeysBtn" class="bg-gray-700 hover:bg-blue-600 text-xs text-white font-bold py-1 px-2 rounded-md mb-2">Generate Keys</button>
-    </div>
+        // Modal Elements
+        const keyModal = document.getElementById('keyModal');
+        const closeKeyModalBtn = document.getElementById('closeKeyModalBtn');
+        const modalPublicKey = document.getElementById('modalPublicKey');
+        const modalPrivateKey = document.getElementById('modalPrivateKey');
 
-    <button id="processBtn" class="bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold py-2 px-4 rounded-md mb-2 w-full">Process</button>
+        // Event Listeners
+        encryptionTypeSelect.addEventListener('change', toggleEncryptionType);
+        operationTypeSelect.addEventListener('change', toggleOperationType);
+        generateRsaKeysBtn.addEventListener('click', generateAndDisplayKeys);
+        processBtn.addEventListener('click', handleProcessing);
+        closeKeyModalBtn.addEventListener('click', () => keyModal.classList.add('hidden'));
 
-    <!-- Output Section (Hidden by default) -->
-    <div id="outputSection" class="hidden">
-      <textarea id="output" class="w-full p-2 bg-gray-700 text-gray-300 rounded-md" placeholder="Output..." rows="4" readonly></textarea>
-      <button onclick="copyText('output')" class="bg-green-500 hover:bg-gray-700 text-xs text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Output</button>
-    </div>
-  </div>
-</div>
+        // Function to toggle between AES and RSA sections
+        function toggleEncryptionType() {
+            const selectedType = encryptionTypeSelect.value;
+            if (selectedType === 'aes') {
+                aesSection.classList.remove('hidden');
+                rsaSection.classList.add('hidden');
+            } else {
+                aesSection.classList.add('hidden');
+                rsaSection.classList.remove('hidden');
+            }
+        }
 
-<!-- Key Generation Modal -->
-<div id="keyModal" class="fixed hidden inset-0 flex items-center justify-center z-50">
-  <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-  <div class="modal-container bg-gray-800 w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
-    <div class="modal-content py-4 text-left px-6">
-      <div class="flex justify-end">
-        <button id="closeKeyModalBtn" class="text-gray-400 hover:text-gray-200">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
+        // Function to toggle RSA key placeholder based on operation
+        function toggleOperationType() {
+            const selectedOperation = operationTypeSelect.value;
+            if (selectedOperation === 'encrypt') {
+                rsaKeyInput.placeholder = "Enter recipient's public key...";
+            } else {
+                rsaKeyInput.placeholder = "Enter your private key...";
+            }
+        }
 
-      <h2 class="text-xl font-bold text-center mb-4">Generated RSA Keys</h2>
+        // RSA Key Generation Function
+        async function generateAndDisplayKeys() {
+            try {
+                const keyPair = await window.crypto.subtle.generateKey(
+                    {
+                        name: 'RSA-OAEP',
+                        modulusLength: 2048,
+                        publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+                        hash: 'SHA-256',
+                    },
+                    true,
+                    ['encrypt', 'decrypt']
+                );
 
-      <div class="mb-4">
-        <label for="modalPublicKey" class="block text-sm font-medium text-gray-400 mb-2">Public Key:</label>
-        <textarea id="modalPublicKey" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y"></textarea>
-        <button onclick="copyText('modalPublicKey')" class="bg-gray-700 hover:bg-gray-700 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Public Key</button>
-      </div>
+                const publicKeyJwk = await window.crypto.subtle.exportKey('jwk', keyPair.publicKey);
+                const privateKeyJwk = await window.crypto.subtle.exportKey('jwk', keyPair.privateKey);
 
-      <div class="mb-4">
-        <label for="modalPrivateKey" class="block text-sm font-medium text-gray-400 mb-2">Private Key:</label>
-        <textarea id="modalPrivateKey" readonly class="text-gray-300 bg-gray-700 rounded-md px-3 py-2 w-full h-24 resize-y"></textarea>
-        <button onclick="copyText('modalPrivateKey')" class="bg-gray-700 hover:bg-gray-700 text-sm text-white font-bold py-2 px-4 rounded-md mt-2 w-full">Copy Private Key</button>
-      </div>
+                // Display keys in the modal
+                modalPublicKey.value = JSON.stringify(publicKeyJwk, null, 2);
+                modalPrivateKey.value = JSON.stringify(privateKeyJwk, null, 2);
 
-      <p class="text-sm text-gray-400 italic text-center">
-        Important: Keep your private key secure! Do not share it with anyone.
-      </p>
-    </div>
-  </div>
-</div>
+                // Show the modal
+                keyModal.classList.remove('hidden');
+            } catch (err) {
+                console.error('Error generating RSA keys:', err);
+                alert('An error occurred while generating keys.');
+            }
+        }
 
-<script>
-  // Get DOM Elements
-  const messageInput = document.getElementById('messageInput');
-  const encryptionTypeSelect = document.getElementById('encryptionType');
-  const operationTypeSelect = document.getElementById('operationType');
-  const aesSection = document.getElementById('aesSection');
-  const rsaSection = document.getElementById('rsaSection');
-  const aesKeyInput = document.getElementById('aesKey');
-  const rsaKeyInput = document.getElementById('rsaKeyInput');
-  const generateRsaKeysBtn = document.getElementById('generateRsaKeysBtn');
-  const processBtn = document.getElementById('processBtn');
-  const outputTextarea = document.getElementById('output');
-  const outputSection = document.getElementById('outputSection');
+        // Function to handle both encryption and decryption
+        function handleProcessing() {
+            const selectedType = encryptionTypeSelect.value;
+            const selectedOperation = operationTypeSelect.value;
+            const message = messageInput.value;
 
-  // Modal Elements
-  const keyModal = document.getElementById('keyModal');
-  const closeKeyModalBtn = document.getElementById('closeKeyModalBtn');
-  const modalPublicKey = document.getElementById('modalPublicKey');
-  const modalPrivateKey = document.getElementById('modalPrivateKey');
+            if (!message) {
+                alert('Please enter a message.');
+                return;
+            }
 
-  // Event Listeners
-  encryptionTypeSelect.addEventListener('change', toggleEncryptionType);
-  operationTypeSelect.addEventListener('change', toggleOperationType);
-  generateRsaKeysBtn.addEventListener('click', generateAndDisplayKeys);
-  processBtn.addEventListener('click', handleProcessing);
-  closeKeyModalBtn.addEventListener('click', () => keyModal.classList.add('hidden'));
+            if (selectedType === 'aes') {
+                const aesKey = aesKeyInput.value;
+                if (!aesKey) {
+                    alert('Please enter an AES passphrase.');
+                    return;
+                }
 
-  // Function to toggle between AES and RSA sections
-  function toggleEncryptionType() {
-    const selectedType = encryptionTypeSelect.value;
-    if (selectedType === 'aes') {
-      aesSection.classList.remove('hidden');
-      rsaSection.classList.add('hidden');
-    } else {
-      aesSection.classList.add('hidden');
-      rsaSection.classList.remove('hidden');
-    }
-  }
+                if (selectedOperation === 'encrypt') {
+                    outputTextarea.value = aesEncrypt(message, aesKey);
+                } else {
+                    outputTextarea.value = aesDecrypt(message, aesKey);
+                }
+            } else if (selectedType === 'rsa') {
+                const rsaKey = rsaKeyInput.value;
+                if (!rsaKey) {
+                    alert('Please enter an RSA key.');
+                    return;
+                }
 
-  // Function to toggle RSA key placeholder based on operation
-  function toggleOperationType() {
-    const selectedOperation = operationTypeSelect.value;
-    if (selectedOperation === 'encrypt') {
-      rsaKeyInput.placeholder = "Enter recipient's public key...";
-    } else {
-      rsaKeyInput.placeholder = "Enter your private key...";
-    }
-  }
+                if (selectedOperation === 'encrypt') {
+                    rsaEncrypt(message, rsaKey)
+                        .then(encryptedText => {
+                            outputTextarea.value = encryptedText;
+                        })
+                        .catch(err => {
+                            console.error('RSA Encryption error:', err);
+                            alert('An error occurred during encryption. Please check the key and try again.');
+                        });
+                } else {
+                    rsaDecrypt(message, rsaKey)
+                        .then(decryptedText => {
+                            outputTextarea.value = decryptedText;
+                        })
+                        .catch(err => {
+                            console.error('RSA Decryption error:', err);
+                            alert('An error occurred during decryption. Please check the key and try again.');
+                        });
+                }
+            }
 
-  // RSA Key Generation Function
-  async function generateAndDisplayKeys() {
-    try {
-      const keyPair = await window.crypto.subtle.generateKey(
-        {
-          name: 'RSA-OAEP',
-          modulusLength: 2048,
-          publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-          hash: 'SHA-256',
-        },
-        true,
-        ['encrypt', 'decrypt']
-      );
+            // Show the output section
+            outputSection.classList.remove('hidden');
+        }
 
-      const publicKeyJwk = await window.crypto.subtle.exportKey('jwk', keyPair.publicKey);
-      const privateKeyJwk = await window.crypto.subtle.exportKey('jwk', keyPair.privateKey);
+        // AES Encryption Function
+        function aesEncrypt(message, passphrase) {
+            try {
+                return CryptoJS.AES.encrypt(message, passphrase).toString();
+            } catch (err) {
+                console.error("AES Encryption Error:", err);
+                alert("An error occurred during AES encryption.");
+                return "";
+            }
+        }
 
-      // Display keys in the modal
-      modalPublicKey.value = JSON.stringify(publicKeyJwk, null, 2);
-      modalPrivateKey.value = JSON.stringify(privateKeyJwk, null, 2);
+        // AES Decryption Function
+        function aesDecrypt(ciphertext, passphrase) {
+            try {
+                const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase);
+                return bytes.toString(CryptoJS.enc.Utf8);
+            } catch (err) {
+                console.error("AES Decryption Error:", err);
+                alert("An error occurred during AES decryption.");
+                return "";
+            }
+        }
 
-      // Show the modal
-      keyModal.classList.remove('hidden');
-    } catch (err) {
-      console.error('Error generating RSA keys:', err);
-      alert('An error occurred while generating keys.');
-    }
-  }
+        // RSA Encryption Function (Asynchronous)
+        async function rsaEncrypt(message, publicKey) {
+            try {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(message);
+                const publicKeyJwk = JSON.parse(publicKey);
+                const importedPublicKey = await window.crypto.subtle.importKey(
+                    'jwk',
+                    publicKeyJwk,
+                    { name: 'RSA-OAEP', hash: 'SHA-256' },
+                    false,
+                    ['encrypt']
+                );
 
-  // Function to handle both encryption and decryption
-  function handleProcessing() {
-    const selectedType = encryptionTypeSelect.value;
-    const selectedOperation = operationTypeSelect.value;
-    const message = messageInput.value;
+                const encryptedData = await window.crypto.subtle.encrypt(
+                    { name: 'RSA-OAEP' },
+                    importedPublicKey,
+                    data
+                );
+                return arrayBufferToBase64(encryptedData);
+            } catch (err) {
+                console.error("RSA Encryption Error:", err);
+                alert("An error occurred during RSA encryption.");
+                throw err; // Re-throw to handle in the calling function
+            }
+        }
 
-    if (!message) {
-      alert('Please enter a message.');
-      return;
-    }
+        // RSA Decryption Function (Asynchronous)
+        async function rsaDecrypt(ciphertext, privateKey) {
+            try {
+                const encryptedData = base64ToArrayBuffer(ciphertext);
+                const privateKeyJwk = JSON.parse(privateKey);
+                const importedPrivateKey = await window.crypto.subtle.importKey(
+                    'jwk',
+                    privateKeyJwk,
+                    { name: 'RSA-OAEP', hash: 'SHA-256' },
+                    false,
+                    ['decrypt']
+                );
 
-    if (selectedType === 'aes') {
-      const aesKey = aesKeyInput.value;
-      if (!aesKey) {
-        alert('Please enter an AES passphrase.');
-        return;
-      }
+                const decryptedData = await window.crypto.subtle.decrypt(
+                    { name: 'RSA-OAEP' },
+                    importedPrivateKey,
+                    encryptedData
+                );
 
-      if (selectedOperation === 'encrypt') {
-        outputTextarea.value = aesEncrypt(message, aesKey);
-      } else {
-        outputTextarea.value = aesDecrypt(message, aesKey);
-      }
-    } else if (selectedType === 'rsa') {
-      const rsaKey = rsaKeyInput.value;
-      if (!rsaKey) {
-        alert('Please enter an RSA key.');
-        return;
-      }
+                const decoder = new TextDecoder();
+                return decoder.decode(decryptedData);
+            } catch (err) {
+                console.error("RSA Decryption Error:", err);
+                alert("An error occurred during RSA decryption.");
+                throw err; // Re-throw to handle in the calling function
+            }
+        }
 
-      if (selectedOperation === 'encrypt') {
-        rsaEncrypt(message, rsaKey)
-          .then(encryptedText => {
-            outputTextarea.value = encryptedText;
-          })
-          .catch(err => {
-            console.error('RSA Encryption error:', err);
-            alert('An error occurred during encryption. Please check the key and try again.');
-          });
-      } else {
-        rsaDecrypt(message, rsaKey)
-          .then(decryptedText => {
-            outputTextarea.value = decryptedText;
-          })
-          .catch(err => {
-            console.error('RSA Decryption error:', err);
-            alert('An error occurred during decryption. Please check the key and try again.');
-          });
-      }
-    }
+        // Utility Functions:
+        function arrayBufferToBase64(buffer) {
+            let binary = '';
+            const bytes = new Uint8Array(buffer);
+            bytes.forEach(byte => binary += String.fromCharCode(byte));
+            return window.btoa(binary);
+        }
 
-    // Show the output section
-    outputSection.classList.remove('hidden');
-  }
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
 
-  // AES Encryption Function
-  function aesEncrypt(message, passphrase) {
-    try {
-      return CryptoJS.AES.encrypt(message, passphrase).toString();
-    } catch (err) {
-      console.error("AES Encryption Error:", err);
-      alert("An error occurred during AES encryption.");
-      return "";
-    }
-  }
-
-  // AES Decryption Function
-  function aesDecrypt(ciphertext, passphrase) {
-    try {
-      const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase);
-      return bytes.toString(CryptoJS.enc.Utf8);
-    } catch (err) {
-      console.error("AES Decryption Error:", err);
-      alert("An error occurred during AES decryption.");
-      return "";
-    }
-  }
-
-  // RSA Encryption Function (Asynchronous)
-  async function rsaEncrypt(message, publicKey) {
-    try {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(message);
-      const publicKeyJwk = JSON.parse(publicKey);
-      const importedPublicKey = await window.crypto.subtle.importKey(
-        'jwk',
-        publicKeyJwk,
-        { name: 'RSA-OAEP', hash: 'SHA-256' },
-        false,
-        ['encrypt']
-      );
-
-      const encryptedData = await window.crypto.subtle.encrypt(
-        { name: 'RSA-OAEP' },
-        importedPublicKey,
-        data
-      );
-      return arrayBufferToBase64(encryptedData);
-    } catch (err) {
-      console.error("RSA Encryption Error:", err);
-      alert("An error occurred during RSA encryption.");
-      throw err; // Re-throw to handle in the calling function
-    }
-  }
-
-  // RSA Decryption Function (Asynchronous)
-  async function rsaDecrypt(ciphertext, privateKey) {
-    try {
-      const encryptedData = base64ToArrayBuffer(ciphertext);
-      const privateKeyJwk = JSON.parse(privateKey);
-      const importedPrivateKey = await window.crypto.subtle.importKey(
-        'jwk',
-        privateKeyJwk,
-        { name: 'RSA-OAEP', hash: 'SHA-256' },
-        false,
-        ['decrypt']
-      );
-
-      const decryptedData = await window.crypto.subtle.decrypt(
-        { name: 'RSA-OAEP' },
-        importedPrivateKey,
-        encryptedData
-      );
-
-      const decoder = new TextDecoder();
-      return decoder.decode(decryptedData);
-    } catch (err) {
-      console.error("RSA Decryption Error:", err);
-      alert("An error occurred during RSA decryption.");
-      throw err; // Re-throw to handle in the calling function
-    }
-  }
-
-  // Utility Functions:
-  function arrayBufferToBase64(buffer) {
-    let binary = '';
-    const bytes = new Uint8Array(buffer);
-    bytes.forEach(byte => binary += String.fromCharCode(byte));
-    return window.btoa(binary);
-  }
-
-  function base64ToArrayBuffer(base64) {
-    const binaryString = window.atob(base64);
-    const bytes = new Uint8Array(binaryString.length);
-    for (let i = 0; i < binaryString.length; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
-    return bytes.buffer;
-  }
-
-  function copyText(elementId) {
-    const textToCopy = document.getElementById(elementId).value;
-    navigator.clipboard.writeText(textToCopy)
-      .then(() => alert('Text copied to clipboard!'))
-      .catch(err => console.error('Failed to copy text: ', err));
-  }
-</script>
+        function copyText(elementId) {
+            const textToCopy = document.getElementById(elementId).value;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => alert('Text copied to clipboard!'))
+                .catch(err => console.error('Failed to copy text: ', err));
+        }
+    </script>
+    <script>
+        lucide.createIcons();
+    </script>
 
 </body>
+
 </html>
